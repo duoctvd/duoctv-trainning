@@ -1,9 +1,17 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
+import styled from 'styled-components';
+
 export default function Home() {
+
+  const Heading = styled.h1``;
+  const Thing = styled.div``;
+  const Image = styled.img``;
+  const Conainer = styled.div``;
+
   return (
-    <div className="container">
+    <Conainer className="container">
       <Head>
         <title>duoctv trainning</title>
         <link rel="icon" href="/favicon.ico" />
@@ -11,46 +19,40 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="title">
+        <Heading className="title">
           Welcome to <a href="">duoctv first training!</a >
-        </h1>
+        </Heading>
 
         <p className="description">
           This is home page
         </p>
 
         <div className="grid">
-          <a href="" className="card">
+          <Thing href="" className="card">
             <Link href="/article/1"><h3>Article 1 &rarr;</h3></Link>
-            <img src="/images/photo1.jpg" />
+            <Image src="/images/photo1.jpg" />
             <p>This is article 1.</p>
-          </a>
+          </Thing>
 
-          <a href="" className="card">
+          <Thing href="" className="card">
             <Link href="/article/2"><h3>Article 2 &rarr;</h3></Link>
-            <img src="/images/photo2.jpg" />
+            <Image src="/images/photo2.jpg" />
             <p>This is article 2!</p>
-          </a>
+          </Thing>
 
-          <a
-            href=""
-            className="card"
-          >
+          <Thing href="" className="card">
             <Link href="/article/3"><h3>Article 31 &rarr;</h3></Link>
-            <img src="/images/photo3.jpg" />
+            <Image src="/images/photo3.jpg" />
             <p>This is article 3.</p>
-          </a>
+          </Thing>
 
-          <a
-            href=""
-            className="card"
-          >
+          <Thing href="" className="card" >
             <Link href="/article/4"><h3>Article 4 &rarr;</h3></Link>
-            <img src="/images/photo4.jpg" />
+            <Image src="/images/photo4.jpg" />
             <p>
               This is article 4
             </p>
-          </a>
+          </Thing>
         </div>
       </main>
 
@@ -101,22 +103,6 @@ export default function Home() {
           display: flex;
           justify-content: center;
           align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
         }
 
         .title {
@@ -210,6 +196,6 @@ export default function Home() {
           box-sizing: border-box;
         }
       `}</style>
-    </div>
+    </Conainer>
   )
 }
