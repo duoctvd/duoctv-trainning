@@ -15,7 +15,6 @@ export default function Home() {
       <Head>
         <title>duoctv trainning</title>
         <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="/css/bootstrap.min.css" />
       </Head>
 
       <main>
