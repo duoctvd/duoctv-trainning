@@ -3,7 +3,6 @@ import Head from "next/head";
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import Image from 'next/image';
-import productPic from '../../public/images/photo1.jpg';
 
 export default function Article() {
 
@@ -46,8 +45,7 @@ export default function Article() {
             <Thing>
                 <Thing>
                     <Thing className="thumbnail">
-                    <Image src={productPic} alt="Picture of the product" width={200} height={200} /> {/* error https://gyazo.com/18ceae4b5d6ab4fea18173ffb2ab06a3  */}
-                    {/* <Image src="/images/photo1.jpg" alt="Picture of the product" width={200} height={200} /> */}   {/* => image can be displayed */}
+                    <Image src="/images/photo1.jpg" alt="Picture of the product" width={200} height={200} />
                     <Thing className="caption">
                         <Productname>Article {router.query.id}</Productname>
                         <p>
