@@ -5,101 +5,65 @@ import Footer from '../components/Footer';
 
 export default function Home() {
 
-  const Heading = styled.h1``;
-  const Conainer = styled.div``;
+  const Container = styled.div`
+    min-height: 100vh;
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  `;
+
+  const Heading = styled.h1`
+    margin: 0;
+    line-height: 1.15;
+    font-size: 4rem;
+    text-align: center;
+  `;
+
+  const Main = styled.main`
+    padding: 5rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  `;
+
+  const ProducGrid = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin-top: 3rem;
+    @media (max-width: 600px) {
+      width: 100%;
+      flex-direction: column;
+    }
+  `;
 
   return (
-    <Conainer className="container">
+    <Container>
       <Head>
         <title>duoctv trainning</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <Heading className="title">
-          Welcome to <a href="">duoctv first training!</a >
+      <Main>
+        <Heading>
+          Welcome to <a href="#">duoctv first training!</a >
         </Heading>
-
-        <p className="description">
-          This is home page
-        </p>
-
-        <div className="grid">
+        <ProducGrid>
           <Product id="1" photo="photo1.jpg" name="Article 1"/>
-          <Product id="2" photo="photo2.jpg" name="Article 2"/>
-          <Product id="3" photo="photo3.jpg" name="Article 3"/>
-          <Product id="4" photo="photo4.jpg" name="Article 4"/>
-        </div>
-      </main>
+          <Product id="2" photo="photo2.jpg" name="Article 2" bgr_color="yellow"/>
+          <Product id="3" photo="photo3.jpg" name="Article 3" bgr_color="green"/>
+          <Product id="4" photo="photo4.jpg" name="Article 4" bgr_color="pink"/>
+        </ProducGrid>
+      </Main>
 
       <Footer />
-      
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
+ 
 
       <style jsx global>{`
         html,
@@ -115,6 +79,6 @@ export default function Home() {
           box-sizing: border-box;
         }
       `}</style>
-    </Conainer>
+    </Container>
   )
 }

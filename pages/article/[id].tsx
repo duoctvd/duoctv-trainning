@@ -2,7 +2,9 @@ import React from "react";
 import Head from "next/head";
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import Image from 'next/image';
+import ThumnailProduct from '../../components/ThumnailProduct';
+
+import Footer from "../../components/Footer";
 
 export default function Article() {
 
@@ -28,11 +30,6 @@ export default function Article() {
         color: palevioletred;
     `;
 
-    const Productname = styled.h3`
-        font-size: 1.5em;
-        text-align: center;
-        color: palevioletred;
-    `;
 
     const Thing = styled.div``;
 
@@ -43,46 +40,10 @@ export default function Article() {
             </Head>
             <Heading>This is article {router.query.id} detail page</Heading>
             <Thing>
-                <Thing>
-                    <Thing className="thumbnail">
-                    <Image src="/images/photo1.jpg" alt="Picture of the product" width={200} height={200} />
-                    <Thing className="caption">
-                        <Productname>Article {router.query.id}</Productname>
-                        <p>
-                        This is article{router.query.id}This is article{router.query.id}This is article{router.query.id}This is article{router.query.id}
-                        This is article{router.query.id}This is article{router.query.id}This is article{router.query.id}
-                        This is article{router.query.id}This is article{router.query.id}This is article{router.query.id}
-                        This is article{router.query.id}This is article{router.query.id}This is article{router.query.id}
-                        This is article{router.query.id}This is article{router.query.id}This is article{router.query.id}This is article{router.query.id}
-                        This is article{router.query.id}This is article{router.query.id}This is article{router.query.id}
-                        This is article{router.query.id}This is article{router.query.id}
-                        </p>
-                    </Thing>
-                    </Thing>
-                </Thing>
+                <ThumnailProduct />
             </Thing>
-
             <Button onClick={handleOnclick}>Home page</Button>
-
-            <style jsx>{`
-                .thumbnail {
-                    display: block;
-                    padding: 4px;
-                    margin-bottom: 20px;
-                    line-height: 1.42857143;
-                    background-color: #fff;
-                    border: 1px solid #ddd;
-                    border-radius: 4px;
-                }
-
-                .thumbnail a>img, .thumbnail>img {
-                    margin-right: auto;
-                    margin-left: auto;
-                    display: block;
-                    max-width: 100%;
-                    height: auto;
-                }
-            `}</style>
+            <Footer /> 
         </>
 
     )
