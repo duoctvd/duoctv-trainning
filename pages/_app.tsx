@@ -1,15 +1,30 @@
-import Head from 'next/head';
+import Head from "next/head";
+import { createGlobalStyle } from "styled-components";
 // This default export is required in a new `pages/_app.tsx` file.
 export default function MyApp({ Component, pageProps }) {
-    return (
-        <div className="root-app">
-            <Head>
-                <title>duoctv trainning</title>
-                <link rel="icon" href="/favicon.ico" />
-                <link rel="stylesheet" href="/css/bootstrap.min.css" />
-            </Head>
-            <Component {...pageProps} />
-        </div>
-
-    )
+  return (
+    <div className="root-app">
+      <GlobalStyle />
+      <Head>
+        <title>duoctv trainning</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Component {...pageProps} />
+    </div>
+  );
 }
+
+const GlobalStyle = createGlobalStyle`
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+      Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+      sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+`;
