@@ -12,7 +12,7 @@ export default function Product(props: Props) {
   return (
     <Container>
       <Link href={`/article/${props.id}`}>
-        <ProductName>{props.name} &rarr; just deploy checknig</ProductName>
+        <ProductName>{props.name} &rarr; </ProductName>
       </Link>
       <Image
         src={`/images/${props.photo}`}
@@ -20,7 +20,7 @@ export default function Product(props: Props) {
         width={200}
         height={200}
       />
-      <Description>This is article {props.id}</Description>
+      <Description>This is article {props.id} - this text for deploy checking</Description>
     </Container>
   );
 }
