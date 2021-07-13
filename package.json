@@ -3,14 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "next dev -p 2302",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "file-loader": "^6.2.0",
     "next": "^10.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "styled-components": "^5.3.0"
+    "styled-components": "^5.3.0",
+    "url-loader": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^16.0.1",
+    "@types/react": "^17.0.14",
+    "prettier": "2.3.2",
+    "typescript": "^4.3.5"
   }
 }
