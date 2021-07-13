@@ -10,24 +10,22 @@ interface Props {
 
 export default function Product(props: Props) {
   return (
-    <>
-      <Thing>
-        <Link href={`/article/${props.id}`}>
-          <ProductName>{props.name} &rarr;</ProductName>
-        </Link>
-        <Image
-          src={`/images/${props.photo}`}
-          alt="Picture of the product1"
-          width={200}
-          height={200}
-        />
-        <Description>This is article {props.id}</Description>
-      </Thing>
-    </>
+    <Container bgr_color={props.bgrColor}>
+      <Link href={`/article/${props.id}`}>
+        <ProductName>{props.name} &rarr;</ProductName>
+      </Link>
+      <Image
+        src={`/images/${props.photo}`}
+        alt="Picture of the product1"
+        width={200}
+        height={200}
+      />
+      <Description>This is article {props.id}</Description>
+    </Container>
   );
 }
 
-const Thing = styled.div`
+const Container = styled.div`
   margin: 1rem;
   flex-basis: 45%;
   padding: 1.5rem;
@@ -37,7 +35,7 @@ const Thing = styled.div`
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  background: white;
+  
   &:hover,
   &:focus,
   &:active {

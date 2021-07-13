@@ -19,9 +19,9 @@ export default function Article() {
         <Title>Article detail</Title>
       </Head>
       <Heading>This is article {router.query.id} detail page</Heading>
-      <Thing>
+      <ProductDetail>
         <ThumnailProduct />
-      </Thing>
+      </ProductDetail>
       <Button onClick={handleOnclick}>Home page</Button>
       <Footer />
     </>
@@ -44,6 +44,6 @@ const Heading = styled.h1`
   color: palevioletred;
 `;
 
-const Thing = styled.div``;
+const ProductDetail = styled.div``;
 
 const Title = styled.title``;

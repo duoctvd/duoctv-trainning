@@ -9,16 +9,14 @@ interface Props {
 
 export default function CaptionProduct(props: Props) {
   return (
-    <>
-      <Thing>
-        <Productname>Article {props.id}</Productname>
-        <Description>This is article {props.id} detail</Description>
-      </Thing>
-    </>
+    <Container>
+      <Productname>Article {props.id}</Productname>
+      <Description>This is article {props.id} detail</Description>
+    </Container>
   );
 }
 
-const Thing = styled.div``;
+const Container = styled.div``;
 
 const Productname = styled.h3`
   font-size: 1.5em;
