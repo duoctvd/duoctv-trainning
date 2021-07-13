@@ -12,7 +12,7 @@ export default function Product(props: Props) {
   return (
     <Container>
       <Link href={`/article/${props.id}`}>
-        <ProductName>{props.name} &rarr;</ProductName>
+        <ProductName>{props.name} &rarr; just deploy checknig</ProductName>
       </Link>
       <Image
         src={`/images/${props.photo}`}
