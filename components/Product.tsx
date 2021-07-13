@@ -10,7 +10,7 @@ interface Props {
 
 export default function Product(props: Props) {
   return (
-    <Container bgr_color={props.bgrColor}>
+    <Container>
       <Link href={`/article/${props.id}`}>
         <ProductName>{props.name} &rarr;</ProductName>
       </Link>
