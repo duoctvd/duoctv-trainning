@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
-import Footer from "../../components/Footer";
+import Footer from "../components/Footer";
 
 export default function Login() {
   return (
