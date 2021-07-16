@@ -2,8 +2,14 @@ import Head from "next/head";
 import styled from "styled-components";
 import Product from "../components/Product";
 import Footer from "../components/Footer";
+import { useEffect } from "react";
+import { getUsers } from "./users";
 
 export default function Home() {
+  useEffect(() => {
+    getUsers();
+  }, []);
+  
   return (
     <Container>
       <Head>
