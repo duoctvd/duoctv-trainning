@@ -2,8 +2,27 @@ import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import Footer from "../components/Footer";
+import { firebase } from "../firebase";
+import "firebase/app";
+import "firebase/auth";
 
 export default function Login() {
+  const email = "tranvanduoc2394@gmai.com";
+  const password = "1234567";
+  firebase.auth().signInWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    // Signed in
+    const user = userCredential.user;
+    console.log(user);
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+     console.log(errorMessage);
+  });
+
+
   return (
     <>
       <Head>
@@ -16,7 +35,7 @@ export default function Login() {
           <br />
           <PasswordInput placeholder="please input password" size="10px" />
           <br />
-          <Button>Login!</Button>
+          <Button>Login!!</Button>
         </Form>
       </Container>
       <Footer />
