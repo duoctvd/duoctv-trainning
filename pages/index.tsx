@@ -2,14 +2,25 @@ import Head from "next/head";
 import styled from "styled-components";
 import Product from "../components/Product";
 import Footer from "../components/Footer";
-import { useEffect } from "react";
-import { getUsers } from "./users";
+import Link from "next/link";
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
+const config = {
+  apiKey: "AIzaSyBr9jeCJhhbDCsKoguI9Xz_1EjtmJOIA0I",
+  authDomain: "duoctv-trainning.firebaseapp.com",
+  databaseURL: "https://duoctv-trainning.firebaseio.com",
+  projectId: "duoctv-trainning",
+  storageBucket: "duoctv-trainning.appspot.com",
+  messagingSenderId: "15394958817",
+  appId: "1:15394958817:web:fff4b45b4afaf0b12cb6a0"
+};
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
 
 export default function Home() {
-  useEffect(() => {
-    getUsers();
-  }, []);
-  
+
   return (
     <Container>
       <Head>
@@ -44,6 +55,15 @@ export default function Home() {
             bgrColor="pink"
           />
         </ProducGrid>
+
+        <Link href={`/login`}>
+        <Button>Log in</Button>
+        </Link>
+
+        <Link href={`/admin/top`}>
+        <Button>admin</Button>
+        </Link>
+
       </Main>
 
       <Footer />
@@ -90,3 +110,15 @@ const ProducGrid = styled.div`
 `;
 
 const Title = styled.title``;
+
+
+const Button = styled.button`
+  background: white;
+  color: palevioletred;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+`;
+
