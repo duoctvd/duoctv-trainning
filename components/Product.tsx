@@ -20,7 +20,9 @@ export default function Product(props: Props) {
         width={200}
         height={200}
       />
-      <Description>This is article {props.id} - this text for deploy checking</Description>
+      <Description>
+        This is article {props.id} - this text for deploy checking
+      </Description>
     </Container>
   );
 }
@@ -35,7 +37,7 @@ const Container = styled.div`
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  
+
   &:hover,
   &:focus,
   &:active {

@@ -2,8 +2,24 @@ import Head from "next/head";
 import styled from "styled-components";
 import Product from "../components/Product";
 import Footer from "../components/Footer";
+import Link from "next/link";
+import { firebase } from "../firebase";
+import "firebase/auth";
 
 export default function Home() {
+  // [START auth_current_user]
+  let isLoggedIn;
+  let user = firebase.auth().currentUser;
+
+  if (user != null) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    // ...
+    isLoggedIn = true;
+  } else {
+    // No user is signed in.
+  }
+
   return (
     <Container>
       <Head>
@@ -38,6 +54,18 @@ export default function Home() {
             bgrColor="pink"
           />
         </ProducGrid>
+
+        {!isLoggedIn && (
+          <Link href={`/login`}>
+            <Button>Log in</Button>
+          </Link>
+        )}
+
+        {isLoggedIn && (
+          <Link href={`/admin/top`}>
+            <Button>admin</Button>
+          </Link>
+        )}
       </Main>
 
       <Footer />
@@ -84,3 +112,13 @@ const ProducGrid = styled.div`
 `;
 
 const Title = styled.title``;
+
+const Button = styled.button`
+  background: white;
+  color: palevioletred;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+`;

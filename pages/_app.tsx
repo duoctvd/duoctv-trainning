@@ -1,9 +1,12 @@
 import Head from "next/head";
 import { createGlobalStyle } from "styled-components";
 // This default export is required in a new `pages/_app.tsx` file.
-export default function MyApp( {Component} : {Component:any},{pageProps} : {pageProps:any}) {
+export default function MyApp(
+  { Component }: { Component: any },
+  { pageProps }: { pageProps: any }
+) {
   return (
-    <div className="root-app">
+    <div>
       <GlobalStyle />
       <Head>
         <title>duoctv trainning</title>

@@ -14,6 +14,13 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/auth/login.js",
+    "pages/users.js",
+    "pages/users.js"
+  ],
   "exclude": ["node_modules"]
 }

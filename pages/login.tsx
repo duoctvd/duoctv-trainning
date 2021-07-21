@@ -1,67 +1,54 @@
 import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
-import Footer from "../components/Footer";
+import { useRouter } from "next/router";
+import { firebase } from "../firebase";
+import "firebase/auth";
 
 export default function Login() {
-  return (
-    <>
-      <Head>
-        <Title>Login page</Title>
-      </Head>
-      <Heading>login page</Heading>
-      <Container>
-        <Form>
-          <Input placeholder="please input email" size="10px" />
-          <br />
-          <PasswordInput placeholder="please input password" size="10px" />
-          <br />
-          <Button>Login!</Button>
-        </Form>
-      </Container>
-      <Footer />
-    </>
-  );
+  const router = useRouter();
+
+  // [START auth_google_provider_create]
+  var provider = new firebase.auth.GoogleAuthProvider();
+  // [END auth_google_provider_create]
+
+  // [START auth_google_provider_scopes]
+  provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
+  // [END auth_google_provider_scopes]
+
+  // [START auth_google_provider_params]
+  provider.setCustomParameters({
+    login_hint: "tranvanduoc2394@gmail.com",
+  });
+
+  // [END auth_google_provider_params]
+  // [START auth_google_signin_popup]
+  firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+      /** @type {firebase.auth.OAuthCredential} */
+      const credential = result.credential;
+
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      router.push("/admin/top");
+      // ...
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      const credential = error.credential;
+
+      // ...
+    });
+  // [END auth_google_signin_popup]
+
+  return <></>;
 }
-
-const Heading = styled.h1`
-  font-size: 2em;
-  text-align: center;
-  color: palevioletred;
-`;
-
-const Title = styled.title``;
-
-const Container = styled.div`
-  text-align: center;
-  border: 1px solid;
-`;
-
-const Form = styled.form``;
-
-const Input = styled.input.attrs((props) => ({
-  type: "text",
-  size: props.size || "1em",
-}))`
-  border: 1px solid black;
-  margin: ${(props) => props.size};
-  padding: ${(props) => props.size};
-  width: 20%;
-`;
-
-const PasswordInput = styled(Input).attrs({
-  type: "password",
-})`
-  border: 1px solid black;
-  width: 20%;
-`;
-
-const Button = styled.button`
-  background: white;
-  color: palevioletred;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-`;

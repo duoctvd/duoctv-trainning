@@ -2,8 +2,32 @@ import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import Footer from "../../components/Footer";
+import { firebase } from "../../firebase";
+import "firebase/auth";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function Top() {
+  // [START auth_current_user]
+  const router = useRouter();
+  let user_name;
+  let photo;
+  let user = firebase.auth().currentUser;
+
+  if (user != null) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    // ...
+    console.log("User is signed in");
+    user_name = user.displayName;
+    photo = user.photoURL;
+  } else {
+    // No user is signed in.
+    router.push("/");
+    console.log("No user is signed in.");
+  }
+  // [END auth_current_user]
   return (
     <>
       <Head>
@@ -13,9 +37,19 @@ export default function Top() {
       <Container>
         You have logged in
         <br />
-        Hello tranvanduoc2304@gmail.commm!
+        Hello {user_name}
         <br />
-        <Button>Log out</Button>
+        <Image src={`${photo}`} alt={`${user_name}`} width={200} height={200} />
+        <br />
+
+        <Link href={`/`}>
+          <Button>Home</Button>
+        </Link>
+
+        <br />
+        <Link href={`/logout`}>
+          <Button>Log out!</Button>
+        </Link>
       </Container>
       <Footer />
     </>
