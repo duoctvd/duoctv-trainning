@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 2311",
+    "dev": "next dev -p 2313",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
     "@firebase/firestore": "^2.3.8",
     "file-loader": "^6.2.0",
-    "firebase": "^4.13.1",
+    "firebase": "^8.7.1",
     "next": "^10.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
