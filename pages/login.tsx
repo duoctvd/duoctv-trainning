@@ -4,6 +4,10 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { firebase } from "../firebase";
 import "firebase/auth";
+import { useEffect } from 'react';
+
+// Here you would fetch and return the user
+const useUser = () => ({ user: null, loading: false })
 
 export default function Login() {
   const router = useRouter();
@@ -34,7 +38,14 @@ export default function Login() {
      // const token = credential.accessToken;
       // The signed-in user info.
     //  const user = result.user;
-      router.push("/admin/top");
+    const { user, loading } = useUser()
+    const router = useRouter()
+  
+    useEffect(() => {
+      if (!(user || loading)) {
+        router.push('/admin/top')
+      }
+    }, [user, loading])
       // ...
     })
     .catch((error) => {
