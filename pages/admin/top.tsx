@@ -41,6 +41,12 @@ export default function Top() {
         <br />
         <Image src={`${photo}`} alt={`${user_name}`} width={200} height={200} />
         <br />
+
+        <Link href={`/`}>
+          <Button>Home</Button>
+        </Link>
+
+        <br />
         <Link href={`/logout`}>
           <Button>Log out!</Button>
         </Link>
