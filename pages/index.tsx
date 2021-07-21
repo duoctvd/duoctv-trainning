@@ -3,23 +3,22 @@ import styled from "styled-components";
 import Product from "../components/Product";
 import Footer from "../components/Footer";
 import Link from "next/link";
-import firebase from 'firebase/app';
-import 'firebase/auth';
-
-const config = {
-  apiKey: "AIzaSyBr9jeCJhhbDCsKoguI9Xz_1EjtmJOIA0I",
-  authDomain: "duoctv-trainning.firebaseapp.com",
-  databaseURL: "https://duoctv-trainning.firebaseio.com",
-  projectId: "duoctv-trainning",
-  storageBucket: "duoctv-trainning.appspot.com",
-  messagingSenderId: "15394958817",
-  appId: "1:15394958817:web:fff4b45b4afaf0b12cb6a0"
-};
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
-}
+import { firebase } from "../firebase";
+import "firebase/auth";
 
 export default function Home() {
+  // [START auth_current_user]
+  let isLoggedIn;
+  let user = firebase.auth().currentUser;
+
+  if (user != null) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    // ...
+    isLoggedIn = true;
+  } else {
+    // No user is signed in.
+  }
 
   return (
     <Container>
@@ -56,14 +55,17 @@ export default function Home() {
           />
         </ProducGrid>
 
-        <Link href={`/login`}>
-        <Button>Log in</Button>
-        </Link>
+        {!isLoggedIn && (
+          <Link href={`/login`}>
+            <Button>Log in</Button>
+          </Link>
+        )}
 
-        <Link href={`/admin/top`}>
-        <Button>admin</Button>
-        </Link>
-
+        {isLoggedIn && (
+          <Link href={`/admin/top`}>
+            <Button>admin</Button>
+          </Link>
+        )}
       </Main>
 
       <Footer />
@@ -111,7 +113,6 @@ const ProducGrid = styled.div`
 
 const Title = styled.title``;
 
-
 const Button = styled.button`
   background: white;
   color: palevioletred;
@@ -121,4 +122,3 @@ const Button = styled.button`
   border: 2px solid palevioletred;
   border-radius: 3px;
 `;
-
