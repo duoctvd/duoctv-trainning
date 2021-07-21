@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { firebase } from "../firebase";
 import "firebase/auth";
+import { useCallback, useEffect } from 'react';
 
 export default function Login() {
   const router = useRouter();
@@ -34,7 +35,11 @@ export default function Login() {
     //  const token = credential.accessToken;
       // The signed-in user info.
    //   const user = result.user;
-      router.push("/admin/top");
+   router.push('/admin/top');
+   useEffect(() => {
+    // Prefetch the dashboard page
+    router.prefetch('/admin/top')
+  }, [])
       // ...
     })
     .catch((error) => {

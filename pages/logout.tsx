@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { firebase } from "../firebase";
 import "firebase/auth";
+import { useCallback, useEffect } from 'react';
 
 export default function Logout() {
   const router = useRouter();
@@ -10,7 +11,11 @@ export default function Logout() {
     .signOut()
     .then(() => {
       // Sign-out successful.
-      router.push("/");
+      router.push('/');
+      useEffect(() => {
+        // Prefetch the dashboard page
+        router.prefetch('/')
+      }, [])
       console.log("Sign-out successful.");
     })
     .catch((error) => {

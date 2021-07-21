@@ -7,6 +7,7 @@ import "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { useCallback, useEffect } from 'react';
 
 export default function Top() {
   // [START auth_current_user]
@@ -24,7 +25,11 @@ export default function Top() {
     photo = user.photoURL;
   } else {
     // No user is signed in.
-    router.push("/");
+    router.push('/');
+    useEffect(() => {
+      // Prefetch the dashboard page
+      router.prefetch('/')
+    }, [])
     console.log("No user is signed in.");
   }
   // [END auth_current_user]
