@@ -4,13 +4,10 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { firebase } from "../firebase";
 import "firebase/auth";
-import { useEffect } from 'react';
-
-// Here you would fetch and return the user
-const useUser = () => ({ user: null, loading: false })
 
 export default function Login() {
   const router = useRouter();
+  let isLoggedIn;
 
   // [START auth_google_provider_create]
   var provider = new firebase.auth.GoogleAuthProvider();
@@ -25,6 +22,8 @@ export default function Login() {
     login_hint: "tranvanduoc2394@gmail.com",
   });
 
+
+
   // [END auth_google_provider_params]
   // [START auth_google_signin_popup]
   firebase
@@ -38,14 +37,7 @@ export default function Login() {
      // const token = credential.accessToken;
       // The signed-in user info.
     //  const user = result.user;
-    const { user, loading } = useUser()
-    const router = useRouter()
-  
-    useEffect(() => {
-      if (!(user || loading)) {
-        router.push('/admin/top')
-      }
-    }, [user, loading])
+    router.push('/admin/top');
       // ...
     })
     .catch((error) => {
@@ -63,3 +55,4 @@ export default function Login() {
 
   return <></>;
 }
+

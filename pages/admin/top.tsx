@@ -6,10 +6,8 @@ import { firebase } from "../../firebase";
 import "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import { useEffect } from 'react';
-// Here you would fetch and return the user
-const useUser = () => ({ user: null, loading: false })
+import Image from "next/image";
 
 export default function Top() {
   // [START auth_current_user]
@@ -26,17 +24,13 @@ export default function Top() {
     user_name = user.displayName;
     photo = user.photoURL;
   } else {
-    // No user is signed in.
-    const { user, loading } = useUser()
-    const router = useRouter()
 
     useEffect(() => {
-      if (!(user || loading)) {
-        router.push('/')
-      }
-    }, [user, loading])
-
+      // If auth is null and we are no longer loading
+      router.push('/');
+    }, []);
     console.log("No user is signed in.");
+    return <p>Redirecting to top...</p>
   }
   // [END auth_current_user]
   return (
