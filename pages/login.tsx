@@ -38,7 +38,6 @@ export default function Login() {
       // The signed-in user info.
     //  const user = result.user;
     router.push('/admin/top');
-    return <p>Logging...</p>
       // ...
     })
     .catch((error) => {
