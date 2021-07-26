@@ -42,7 +42,7 @@ export default function Top() {
     // return true;
     }
     
-  }, []);
+  }, [user, router]);
 
   if(user == null)
   {
