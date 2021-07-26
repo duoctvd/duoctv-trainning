@@ -11,7 +11,7 @@ interface Props {
 export default function Product(props: Props) {
   return (
     <Container>
-      <Link href={`/article/${props.id}`}>
+      <Link href={`/article/${props.id}`} passHref>
         <ProductName>{props.name} &rarr; </ProductName>
       </Link>
       <Image
