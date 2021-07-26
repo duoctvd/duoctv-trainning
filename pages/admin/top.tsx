@@ -12,8 +12,8 @@ import Image from "next/image";
 export default function Top() {
   // [START auth_current_user]
   const router = useRouter();
-  let user_name;
-  let photo;
+  let user_name = null;
+  let photo = null;
   let user = firebase.auth().currentUser;
 
   if (user != null) {
@@ -25,13 +25,30 @@ export default function Top() {
     photo = user.photoURL;
   } else {
 
-    useEffect(() => {
-      // If auth is null and we are no longer loading
-      router.push('/');
-    }, []);
+    // useEffect(() => {
+    //   // If auth is null and we are no longer loading
+    //   router.push('/');
+    //   // return true;
+    // }, []);
     console.log("No user is signed in.");
+    // return <p>Redirecting to top...</p>
+  }
+
+  useEffect(() => {
+    // If auth is null and we are no longer loading
+    if(user == null)
+    {
+      router.push('/');
+    // return true;
+    }
+    
+  }, []);
+
+  if(user == null)
+  {
     return <p>Redirecting to top...</p>
   }
+
   // [END auth_current_user]
   return (
     <>
@@ -47,12 +64,12 @@ export default function Top() {
         <Image src={`${photo}`} alt={`${user_name}`} width={200} height={200} />
         <br />
 
-        <Link href={`/`}>
+        <Link href={`/`} passHref>
           <Button>Home</Button>
         </Link>
 
         <br />
-        <Link href={`/logout`}>
+        <Link href={`/logout`} passHref>
           <Button>Log out!</Button>
         </Link>
       </Container>

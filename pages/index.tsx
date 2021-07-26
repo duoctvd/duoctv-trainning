@@ -8,7 +8,7 @@ import "firebase/auth";
 
 export default function Home() {
   // [START auth_current_user]
-  let isLoggedIn;
+  let isLoggedIn = false;
   let user = firebase.auth().currentUser;
 
   if (user != null) {
@@ -56,13 +56,13 @@ export default function Home() {
         </ProducGrid>
 
         {!isLoggedIn && (
-          <Link href={`/login`}>
+          <Link href={`/login`} passHref>
             <Button>Log in</Button>
           </Link>
         )}
 
         {isLoggedIn && (
-          <Link href={`/admin/top`}>
+          <Link href={`/admin/top`} passHref>
             <Button>admin</Button>
           </Link>
         )}

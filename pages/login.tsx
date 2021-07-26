@@ -7,7 +7,7 @@ import "firebase/auth";
 
 export default function Login() {
   const router = useRouter();
-  let isLoggedIn;
+  let isLoggedIn = false;
 
   // [START auth_google_provider_create]
   var provider = new firebase.auth.GoogleAuthProvider();
