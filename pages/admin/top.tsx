@@ -23,23 +23,12 @@ export default function Top() {
     console.log("User is signed in");
     user_name = user.displayName;
     photo = user.photoURL;
-  } else {
-
-    // useEffect(() => {
-    //   // If auth is null and we are no longer loading
-    //   router.push('/');
-    //   // return true;
-    // }, []);
-    console.log("No user is signed in.");
-    // return <p>Redirecting to top...</p>
-  }
-
+  } 
   useEffect(() => {
     // If auth is null and we are no longer loading
     if(user == null)
     {
       router.push('/');
-    // return true;
     }
     
   }, [user, router]);

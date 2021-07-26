@@ -1,13 +1,10 @@
 import React from "react";
-import Head from "next/head";
-import styled from "styled-components";
 import { useRouter } from "next/router";
 import { firebase } from "../firebase";
 import "firebase/auth";
 
 export default function Login() {
   const router = useRouter();
-  let isLoggedIn = false;
 
   // [START auth_google_provider_create]
   var provider = new firebase.auth.GoogleAuthProvider();
