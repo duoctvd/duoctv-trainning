@@ -17,7 +17,7 @@ export default function Home() {
     // ...
     isLoggedIn = true;
   }
-  
+
   return (
     <Container>
       <Head>
@@ -97,7 +97,7 @@ const Main = styled.main`
 `;
 
 const ProducGrid = styled.div`
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
