@@ -16,10 +16,8 @@ export default function Home() {
     // https://firebase.google.com/docs/reference/js/firebase.User
     // ...
     isLoggedIn = true;
-  } else {
-    // No user is signed in.
   }
-
+  
   return (
     <Container>
       <Head>
