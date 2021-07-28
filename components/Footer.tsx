@@ -5,10 +5,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <Container>
-      <Link
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        passHref={true}
-      >
+      <Link href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app">
         <StyledLink>
           React
           <Image

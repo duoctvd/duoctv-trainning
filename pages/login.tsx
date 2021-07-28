@@ -19,8 +19,6 @@ export default function Login() {
     login_hint: "tranvanduoc2394@gmail.com",
   });
 
-
-
   // [END auth_google_provider_params]
   // [START auth_google_signin_popup]
   firebase
@@ -28,28 +26,26 @@ export default function Login() {
     .signInWithPopup(provider)
     .then((result) => {
       /** @type {firebase.auth.OAuthCredential} */
-     // const credential = result.credential;
+      // const credential = result.credential;
 
       // This gives you a Google Access Token. You can use it to access the Google API.
-     // const token = credential.accessToken;
+      // const token = credential.accessToken;
       // The signed-in user info.
-    //  const user = result.user;
-    router.push('/admin/top');
+      //  const user = result.user;
+      router.push("/admin/top");
       // ...
     })
     .catch((error) => {
       // Handle Errors here.
       //const errorCode = error.code;
-    //  const errorMessage = error.message;
+      //  const errorMessage = error.message;
       // The email of the user's account used.
-     // const email = error.email;
+      // const email = error.email;
       // The firebase.auth.AuthCredential type that was used.
-   //   const credential = error.credential;
-
+      //   const credential = error.credential;
       // ...
     });
   // [END auth_google_signin_popup]
 
   return <></>;
 }
-

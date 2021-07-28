@@ -10,7 +10,7 @@ export default function Logout() {
     .signOut()
     .then(() => {
       // Sign-out successful.
-      router.push('/');
+      router.push("/");
       console.log("Sign-out successful.");
     })
     .catch((error) => {

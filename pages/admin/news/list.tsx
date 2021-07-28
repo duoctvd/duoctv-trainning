@@ -5,74 +5,84 @@ import Footer from "../../../components/Footer";
 import "firebase/auth";
 import Image from "next/image";
 
-
 export default function List() {
-    return (
-        <>
-            <Head>
-                <Title>News List</Title>
-            </Head>
-            <Heading>News List</Heading>
-            
-            <Container>
-            <TotalCount><b>Total: 20 news</b></TotalCount>
-            <StyledTable>
-            <THead>
-              <TR>
-                <TH>Photo</TH>
-                <TH>Title</TH>
-                <TH>Descrption</TH>
-                <TH>Edit</TH>
-                <TH>Delete</TH>
-              </TR>
-            </THead>
-            <TBody>
-              <TR>
-                <TD>
+  return (
+    <>
+      <Head>
+        <Title>News List</Title>
+      </Head>
+      <Heading>News List</Heading>
+
+      <Container>
+        <TotalCount>
+          <b>Total: 20 news</b>
+        </TotalCount>
+        <StyledTable>
+          <THead>
+            <TR>
+              <TH>Photo</TH>
+              <TH>Title</TH>
+              <TH>Descrption</TH>
+              <TH>Edit</TH>
+              <TH>Delete</TH>
+            </TR>
+          </THead>
+          <TBody>
+            <TR>
+              <TD>
                 <Image
                   src="/images/photo1.jpg"
                   alt="Picture of the product"
                   width={80}
                   height={80}
                 />
+              </TD>
+              <TD>News 1</TD>
+              <TD>News 1 description</TD>
+              <TD>
+                {" "}
+                <Button>Edit</Button>
+              </TD>
+              <TD>
+                {" "}
+                <Button>Delete</Button>
+              </TD>
+            </TR>
 
-                </TD>
-                <TD>News 1</TD>
-                <TD>News 1 description</TD>
-                <TD> <Button>Edit</Button></TD>
-                <TD> <Button>Delete</Button></TD>
-              </TR>
-
-              <TR>
-                <TD>
+            <TR>
+              <TD>
                 <Image
                   src="/images/photo1.jpg"
                   alt="Picture of the product"
                   width={80}
                   height={80}
                 />
-
-                </TD>
-                <TD>News 2</TD>
-                <TD>News 2 description</TD>
-                <TD> <Button>Edit</Button></TD>
-                <TD> <Button>Delete</Button></TD>
-              </TR>
-            </TBody>
-          </StyledTable>
-          <Pagination>
+              </TD>
+              <TD>News 2</TD>
+              <TD>News 2 description</TD>
+              <TD>
+                {" "}
+                <Button>Edit</Button>
+              </TD>
+              <TD>
+                {" "}
+                <Button>Delete</Button>
+              </TD>
+            </TR>
+          </TBody>
+        </StyledTable>
+        <Pagination>
           <PaginationStep>&laquo;</PaginationStep>
           <PaginationStep>1</PaginationStep>
           <PaginationStep>2</PaginationStep>
           <PaginationStep>3</PaginationStep>
           <PaginationStep>4</PaginationStep>
           <PaginationStep>&raquo;</PaginationStep>
-          </Pagination>
-            </Container>
-            <Footer />
-
-        </>
-    )
+        </Pagination>
+      </Container>
+      <Footer />
+    </>
+  );
 }
 
 const Heading = styled.h1`
@@ -101,7 +111,7 @@ const StyledTable = styled.table`
 `;
 
 const THead = styled.thead`
- // custom css goes here
+  // custom css goes here
 `;
 
 const TFoot = styled.tfoot`
@@ -109,7 +119,7 @@ const TFoot = styled.tfoot`
 `;
 
 const TBody = styled.tbody`
- // custom css goes here
+  // custom css goes here
 `;
 
 const TR = styled.tr`
