@@ -4,8 +4,9 @@ import styled from "styled-components";
 import Footer from "../../../components/Footer";
 import "firebase/auth";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function List() {
+export default function List(props: any) {
   return (
     <>
       <Head>
@@ -16,7 +17,13 @@ export default function List() {
       <Container>
         <TotalCount>
           <B>Total: 20 news</B>
+          
+          <Link href={`/admin/news/form`} passHref>
+            <AddNewsButton>Add new</AddNewsButton>
+          </Link>
+          
         </TotalCount>
+       
         <StyledTable>
           <THead>
             <TR>
@@ -79,7 +86,13 @@ export default function List() {
           <PaginationStep>4</PaginationStep>
           <PaginationStep>&raquo;</PaginationStep>
         </Pagination>
+        < br/>
+        <Link href={`/admin/top`} passHref>
+            <Button>Admin</Button>
+        </Link>
+        < br/>
       </Container>
+      
       <Footer />
     </>
   );
@@ -97,6 +110,11 @@ const Container = styled.div`
   text-align: center;
   padding: 0 0.5rem;
   align-items: center;
+
+  width: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const TotalCount = styled.p`
@@ -149,6 +167,19 @@ const PaginationStep = styled.a`
   text-decoration: none;
 `;
 
+
+const AddNewsButton = styled.button`
+  background: white;
+  color: palevioletred;
+  font-size: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+  position: absolute;
+  right: 200px;
+  cursor: pointer;
+`;
+
 const Button = styled.button`
   background: white;
   color: palevioletred;
@@ -156,6 +187,7 @@ const Button = styled.button`
   padding: 0.25em 1em;
   border: 2px solid palevioletred;
   border-radius: 3px;
+  cursor: pointer;
 `;
 
 const B = styled.b``;

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Footer from "../../../components/Footer";
 import "firebase/auth";
 import { useForm, SubmitHandler } from "react-hook-form";
+import Link from "next/link";
 
 type FormValues = {
   title: string;
@@ -57,7 +58,11 @@ export default function Form() {
           />
           {errors.photo && <PValidation>{errors.photo.message}</PValidation>}
 
-          <Input type="submit" />
+          <InputButton type="submit">Submit</InputButton>
+
+          <Link href={`/admin/news/list`} passHref>
+            <Button>Back</Button>
+          </Link>
         </FormGroup>
       </Container>
       <Footer />
@@ -80,6 +85,10 @@ const Container = styled.div`
 `;
 
 const FormGroup = styled.form`
+  width: 40%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const Input = styled.input`
@@ -118,4 +127,28 @@ const Textarea = styled.textarea`
 const PValidation = styled.p`
   color: red;
   text-align: left;
+`;
+
+const Button = styled.button`
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  cursor: pointer;
+`;
+
+const InputButton = styled.button`
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  cursor: pointer;
 `;

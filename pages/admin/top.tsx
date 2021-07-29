@@ -49,6 +49,11 @@ export default function Top() {
         <br />
         <Image src={`${photo}`} alt={`${user_name}`} width={200} height={200} />
         <br />
+        <ButtonGroup>
+        <Link href={`/admin/news/list`} passHref>
+          <Button>News List</Button>
+        </Link>
+        <br />
         <Link href={`/`} passHref>
           <Button>Home</Button>
         </Link>
@@ -56,6 +61,7 @@ export default function Top() {
         <Link href={`/logout`} passHref>
           <Button>Log out!</Button>
         </Link>
+        </ButtonGroup>
       </Container>
       <Footer />
     </>
@@ -82,4 +88,9 @@ const Button = styled.button`
   padding: 0.25em 1em;
   border: 2px solid palevioletred;
   border-radius: 3px;
+  cursor: pointer;
+`;
+
+const ButtonGroup = styled.div`
+  display: inline-flex;
 `;
