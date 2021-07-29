@@ -6,7 +6,7 @@ import { firebase } from "../../firebase";
 import "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import Image from "next/image";
 
 export default function Top() {
@@ -23,19 +23,16 @@ export default function Top() {
     console.log("User is signed in");
     user_name = user.displayName;
     photo = user.photoURL;
-  } 
+  }
   useEffect(() => {
     // If auth is null and we are no longer loading
-    if(user == null)
-    {
-      router.push('/');
+    if (user == null) {
+      router.push("/");
     }
-    
   }, [user, router]);
 
-  if(user == null)
-  {
-    return <p>Redirecting to top...</p>
+  if (user == null) {
+    return <p>Redirecting to top...</p>;
   }
 
   // [END auth_current_user]
@@ -52,15 +49,19 @@ export default function Top() {
         <br />
         <Image src={`${photo}`} alt={`${user_name}`} width={200} height={200} />
         <br />
-
+        <ButtonGroup>
+        <Link href={`/admin/news/list`} passHref>
+          <Button>News List</Button>
+        </Link>
+        <br />
         <Link href={`/`} passHref>
           <Button>Home</Button>
         </Link>
-
         <br />
         <Link href={`/logout`} passHref>
           <Button>Log out!</Button>
         </Link>
+        </ButtonGroup>
       </Container>
       <Footer />
     </>
@@ -87,4 +88,9 @@ const Button = styled.button`
   padding: 0.25em 1em;
   border: 2px solid palevioletred;
   border-radius: 3px;
+  cursor: pointer;
+`;
+
+const ButtonGroup = styled.div`
+  display: inline-flex;
 `;
