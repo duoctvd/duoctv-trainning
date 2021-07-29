@@ -3,7 +3,7 @@ import Head from "next/head";
 import styled from "styled-components";
 import Footer from "../../../components/Footer";
 import "firebase/auth";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 type FormValues = {
   title: string;
@@ -17,6 +17,7 @@ export default function Form() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
+  const onSubmit: SubmitHandler<FormValues> = data => console.log(data);
 
   return (
     <>
@@ -26,78 +27,40 @@ export default function Form() {
       <Heading>News Form</Heading>
 
       <Container>
-        <form onSubmit={handleSubmit((data) => {})}>
-          <label htmlFor="title">Title</label>
-          <input
+        <FormGroup onSubmit={handleSubmit(onSubmit)}>
+          <Label htmlFor="title">Title</Label>
+          <Input
             {...register("title", {
               required: { value: true, message: "Title is required" },
             })}
             id="title"
+            placeholder="please input title"
           />
-          {errors.title && <p>{errors.title.message}</p>}
+          {errors.title && <PValidation>{errors.title.message}</PValidation>}
 
-          <label htmlFor="description">Description</label>
-          <textarea
+          <Label htmlFor="description">Description</Label>
+          <Textarea
             {...register("description", {
               required: { value: true, message: "Desciption is required" },
             })}
             id="description"
           />
-          {errors.description && <p>{errors.description.message}</p>}
+          {errors.description && <PValidation>{errors.description.message}</PValidation>}
 
-          <label htmlFor="photo">Photo</label>
-          <input
+          <Label htmlFor="photo">Photo</Label>
+          <Input
             {...register("photo", {
               required: { value: true, message: "Photo is required" },
             })}
             id="photo"
             type="file"
           />
-          {errors.photo && <p>{errors.photo.message}</p>}
+          {errors.photo && <PValidation>{errors.photo.message}</PValidation>}
 
-          <input type="submit" />
-        </form>
+          <Input type="submit" />
+        </FormGroup>
       </Container>
       <Footer />
-
-      <style jsx>{`
-        label {
-          line-height: 2;
-          text-align: left;
-          display: block;
-          margin-bottom: 13px;
-          margin-top: 20px;
-          color: black;
-          font-size: 20px;
-          font-weight: 200;
-        }
-        input {
-          display: block;
-          box-sizing: border-box;
-          width: 100%;
-          border-radius: 4px;
-          border: 1px solid black;
-          padding: 10px 15px;
-          margin-bottom: 10px;
-          font-size: 14px;
-        }
-
-        textarea {
-          display: block;
-          box-sizing: border-box;
-          width: 100%;
-          height: 100px;
-          border-radius: 4px;
-          border: 1px solid black;
-          padding: 10px 15px;
-          margin-bottom: 10px;
-          font-size: 14px;
-        }
-        p {
-          color: red;
-          text-align: left;
-        }
-      `}</style>
     </>
   );
 }
@@ -114,4 +77,45 @@ const Container = styled.div`
   text-align: center;
   padding: 0 0.5rem;
   align-items: center;
+`;
+
+const FormGroup = styled.form`
+`;
+
+const Input = styled.input`
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+`;
+
+const Label = styled.label`
+  line-height: 2;
+  text-align: left;
+  display: block;
+  margin-bottom: 13px;
+  margin-top: 20px;
+  color: black;
+  font-size: 20px;
+  font-weight: 200;
+`;
+const Textarea = styled.textarea`
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100px;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+`;
+
+const PValidation = styled.p`
+  color: red;
+  text-align: left;
 `;

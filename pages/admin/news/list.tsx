@@ -15,7 +15,7 @@ export default function List() {
 
       <Container>
         <TotalCount>
-          <b>Total: 20 news</b>
+          <B>Total: 20 news</B>
         </TotalCount>
         <StyledTable>
           <THead>
@@ -157,3 +157,5 @@ const Button = styled.button`
   border: 2px solid palevioletred;
   border-radius: 3px;
 `;
+
+const B = styled.b``;
