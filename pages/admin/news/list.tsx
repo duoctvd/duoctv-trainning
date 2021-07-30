@@ -6,7 +6,7 @@ import "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function List(props: any) {
+export default function List() {
   return (
     <>
       <Head>
@@ -167,19 +167,6 @@ const PaginationStep = styled.a`
   text-decoration: none;
 `;
 
-
-const AddNewsButton = styled.button`
-  background: white;
-  color: palevioletred;
-  font-size: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-  position: absolute;
-  right: 200px;
-  cursor: pointer;
-`;
-
 const Button = styled.button`
   background: white;
   color: palevioletred;
@@ -188,6 +175,11 @@ const Button = styled.button`
   border: 2px solid palevioletred;
   border-radius: 3px;
   cursor: pointer;
+`;
+
+const AddNewsButton = styled(Button)`
+  position: absolute;
+  right: 200px;
 `;
 
 const B = styled.b``;

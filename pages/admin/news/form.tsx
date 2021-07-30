@@ -112,16 +112,8 @@ const Label = styled.label`
   font-size: 20px;
   font-weight: 200;
 `;
-const Textarea = styled.textarea`
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
+const Textarea = styled(Input)`
   height: 100px;
-  border-radius: 4px;
-  border: 1px solid black;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  font-size: 14px;
 `;
 
 const PValidation = styled.p`
@@ -141,14 +133,4 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const InputButton = styled.button`
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid black;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  font-size: 14px;
-  cursor: pointer;
-`;
+const InputButton = styled(Button)``;
