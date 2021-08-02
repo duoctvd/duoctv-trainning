@@ -5,6 +5,8 @@ import Footer from "../../../components/Footer";
 import "firebase/auth";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
+import { firebase } from "../../../firebase";
+import "firebase/firestore";
 
 type FormValues = {
   title: string;
@@ -18,7 +20,23 @@ export default function Form() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = data => console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = data => {
+    let db = firebase.firestore();
+    db.collection("news").add({
+        title: data.title,
+        description: data.description,
+        open_flag: 1,
+        del_flag: 0
+    })
+    .then((docRef) => {
+        alert("Document written with ID: "+ docRef.id +"("+data.title+")");
+        console.log("Document written with ID: ", docRef.id);
+    })
+    .catch((error) => {
+        alert("ERROR");
+        console.error("Error adding document: ", error);
+    });
+  };
 
   return (
     <>
@@ -51,7 +69,7 @@ export default function Form() {
           <Label htmlFor="photo">Photo</Label>
           <Input
             {...register("photo", {
-              required: { value: true, message: "Photo is required" },
+              required: { value: false, message: "Photo is required" },
             })}
             id="photo"
             type="file"
