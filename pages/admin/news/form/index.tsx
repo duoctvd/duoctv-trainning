@@ -1,11 +1,11 @@
 import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
-import Footer from "../../../components/Footer";
+import Footer from "../../../../components/Footer";
 import "firebase/auth";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
-import { firebase } from "../../../firebase";
+import { firebase } from "../../../../firebase";
 import "firebase/firestore";
 
 type FormValues = {
@@ -15,6 +15,7 @@ type FormValues = {
 };
 
 export default function Form() {
+  console.log('addnew');
   const {
     register,
     handleSubmit,
@@ -25,8 +26,8 @@ export default function Form() {
     db.collection("news").add({
         title: data.title,
         description: data.description,
-        open_flag: 1,
-        del_flag: 0
+        openFlag: 1,
+        delFlag: 0
     })
     .then((docRef) => {
         alert("Document written with ID: "+ docRef.id +"("+data.title+")");
