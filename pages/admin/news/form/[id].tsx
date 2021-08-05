@@ -15,9 +15,14 @@ type FormValues = {
   photo: string;
 };
 
-function Form({ news }) {
+type Props = {
+  name: string;
+  id: number;
+};
+
+function Form(data: Props) {
     console.log('edit');
-    console.log(news);
+    console.log(data);
 
     let db = firebase.firestore();
     const {
@@ -93,86 +98,41 @@ function Form({ news }) {
     );
   }
 
-    // // // This also gets called at build time
-    // export async function getStaticProps() {
-    //     // params contains the post `id`.
-    //     // If the route is like /posts/1, then params.id is 1
-
-    //     // let db = firebase.firestore();
-
-    //     // var docRef = db.collection("news").doc(params.id);
-    //     // console.log(docRef);
-
-    
-    //     // // Pass post data to the page via props
-    //     // return { props: { docRef } }
+  export async function getServerSideProps() {
+    // const res = await fetch('https://api.jsonbin.io/b/600c5ab8bca934583e40b908')
+    // const data = await res.json()
+  
+    // if (!data) {
+    //   return {
+    //     notFound: true,
     //   }
-  // This function gets called at build time
-export async function getStaticPaths() {
-    // Get the paths we want to pre-render based on posts
+    // }
 
-    let db = firebase.firestore();
-
-    var docRef = db.collection("news").doc("3ayR2E1naSC6R3AxaCFx");
-
-    docRef.get().then((doc) => {
-        if (doc.exists) {
-            console.log("Document data:", doc.data());
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
-
-    
-
-    // const paths = posts.map(() => ({
-    //   params: { id: post.id },
-    // }))
-
-    const paths = [
-        { params: { id: '3ayR2E1naSC6R3AxaCFx' } },
-      ];
-
-  //  let paths: any;
-  //  const router = useRouter();
-    
-
-    // console.log(paths);
-  
-    // // We'll pre-render only these paths at build time.
-    // // { fallback: false } means other routes should 404.
-    return { paths, fallback: false }
-  }
-
-  // This also gets called at build time
-export async function getStaticProps({ params }) {
-    // params contains the post `id`.
-    // If the route is like /posts/1, then params.id is 1
-
-    let db = firebase.firestore();
-
-    var docRef = db.collection("news").doc(params.id);
-    let res = false;
-    docRef.get().then((doc) => {
-        if (doc.exists) {
-            res = doc.data();
-            console.log("No suewewch document!");
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
-
-    const news = res;
-    
-  
-    // Pass post data to the page via props
-    return { props: { news } }
+    const data =  {
+      "stars": [
+          {
+          "name": "Sun",
+          "id": 1,
+          }
+      ],
+      "planets": [ 
+      {
+          "name": "Mercury",
+          "id": 2,
+      }
+      ],
+      "moons": [  
+      {
+          "name": "Moon",
+          "id": 3,
+      }
+      ]
+  };
+  // const data = await res.json();
+  console.warn(data);
+    return {
+      props: {data}, // will be passed to the page component as props
+    }
   }
 
 
