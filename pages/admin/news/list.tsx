@@ -5,8 +5,18 @@ import Footer from "../../../components/Footer";
 import "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
+import { firebase } from "../../../firebase";
+import "firebase/firestore";
 
-export default function List() {
+type News = {
+  id: string;
+  title: string;
+  description: string;
+};
+
+function List(news: News) {
+
+  console.log(news);
   return (
     <>
       <Head>
@@ -35,6 +45,7 @@ export default function List() {
             </TR>
           </THead>
           <TBody>
+          {news.news.map((item, index) => (
             <TR>
               <TD>
                 <Image
@@ -44,38 +55,20 @@ export default function List() {
                   height={80}
                 />
               </TD>
-              <TD>News 1</TD>
-              <TD>News 1 description</TD>
+              <TD>{item.title}</TD>
+              <TD>{item.description}</TD>
               <TD>
-                {" "}
+              <Link href={`/admin/news/form/${item.id}`} passHref>
                 <Button>Edit</Button>
+                </Link>
               </TD>
               <TD>
-                {" "}
+              <Link href={`/admin/top`} passHref>
                 <Button>Delete</Button>
+              </Link>
               </TD>
             </TR>
-
-            <TR>
-              <TD>
-                <Image
-                  src="/images/photo1.jpg"
-                  alt="Picture of the product"
-                  width={80}
-                  height={80}
-                />
-              </TD>
-              <TD>News 2</TD>
-              <TD>News 2 description</TD>
-              <TD>
-                {" "}
-                <Button>Edit</Button>
-              </TD>
-              <TD>
-                {" "}
-                <Button>Delete</Button>
-              </TD>
-            </TR>
+           ))} 
           </TBody>
         </StyledTable>
         <Pagination>
@@ -96,6 +89,45 @@ export default function List() {
       <Footer />
     </>
   );
+}
+
+export default List
+
+// This function gets called at build time on server-side.
+// It won't be called on client-side, so you can even do
+// direct database queries. See the "Technical details" section.
+export async function getStaticProps() {
+  // Call an external API endpoint to get posts.
+  // You can use any data fetching library
+  // const res = await fetch('https://.../posts')
+  // const posts = await res.json()
+
+  let news = new Array();
+  let db = firebase.firestore();
+
+  // await the promise
+  const querySnapshot = await db.collection('news').get();
+
+  // "then" part after the await
+  querySnapshot.forEach(function (doc) {
+    news.push({
+      id: doc.id,
+      title: doc.data().title,
+      description : doc.data().description,
+    });
+    console.warn("Document keys:", doc.id);
+    console.warn(doc.data());
+
+  })
+
+  // console.log(posts)
+  // By returning { props: { posts } }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      news,
+    },
+  }
 }
 
 const Heading = styled.h1`

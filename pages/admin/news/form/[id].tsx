@@ -15,12 +15,7 @@ type FormValues = {
   photo: string;
 };
 
-type Props = {
-  name: string;
-  id: number;
-};
-
-function Form(data: Props) {
+function Form(data: any) {
     console.log('edit');
     console.log(data);
 
@@ -108,6 +103,7 @@ function Form(data: Props) {
     //   }
     // }
 
+    
     const data =  {
       "stars": [
           {
