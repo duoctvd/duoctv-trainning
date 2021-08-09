@@ -7,12 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 import { firebase } from "../../../../firebase";
 import "firebase/firestore";
-
-type FormValues = {
-  title: string;
-  description: string;
-  photo: string;
-};
+import {News} from "../../../../models/news";
 
 export default function Form() {
   console.log('addnew');
@@ -20,9 +15,9 @@ export default function Form() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = data => {
-    let db = firebase.firestore();
+  } = useForm<News>();
+  const onSubmit: SubmitHandler<News> = data => {
+    const db = firebase.firestore();
     db.collection("news").add({
         title: data.title,
         description: data.description,

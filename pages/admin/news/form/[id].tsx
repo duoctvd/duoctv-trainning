@@ -8,25 +8,20 @@ import Link from "next/link";
 import { firebase } from "../../../../firebase";
 import "firebase/firestore";
 import { useRouter } from 'next/router';
+import {News} from "../../../../models/news";
 
-type FormValues = {
-  title: string;
-  description: string;
-  photo: string;
-};
 
 function Form(data: any) {
     console.log('edit');
     console.log(data);
 
-    let db = firebase.firestore();
+    const db = firebase.firestore();
     const {
       register,
       handleSubmit,
       formState: { errors },
-    } = useForm<FormValues>();
-    const onSubmit: SubmitHandler<FormValues> = data => {
-      let db = firebase.firestore();
+    } = useForm<News>();
+    const onSubmit: SubmitHandler<News> = data => {
       db.collection("news").add({
           title: data.title,
           description: data.description,
