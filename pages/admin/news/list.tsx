@@ -26,7 +26,7 @@ export const getStaticProps = async () => {
   // "then" part after the await
   querySnapshot.forEach(function (doc) {
     newsList.push({
-      id: doc.id,
+      key: doc.id,
       title: doc.data().title,
       description : doc.data().description,
     });
