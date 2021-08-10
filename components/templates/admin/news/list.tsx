@@ -7,8 +7,12 @@ import Link from "next/link";
 import {News} from "../../../../models/news";
 import { InferGetStaticPropsType } from 'next';
 
-export default function NewsListTemplate(news: News) {
-    console.log(news);
+export default function NewsListTemplate(props: News[]) {
+  //  console.log(props);
+
+    // props.newsList.forEach(function (value) {
+    //     console.log(value.id);
+    // });
     return (
       <>
       <Head>
@@ -37,7 +41,7 @@ export default function NewsListTemplate(news: News) {
             </TR>
           </THead>
           <TBody>
-          {news.news.map((item, index) => (
+          {props.newsList.map((item, index) => (
             <TR key={item.id}>
               <TD>
                 <Image

@@ -10,15 +10,14 @@ import { InferGetStaticPropsType } from 'next';
 import {News} from "../../../models/news";
 
 
-function List({ news }: InferGetStaticPropsType<typeof getStaticProps>) {
-
-  return <NewsListTemplate news={news} />;
+function List({ newsList }: InferGetStaticPropsType<typeof getStaticProps>) {
+  return <NewsListTemplate newsList={newsList} />;
 }
 
 export default List
 
 export const getStaticProps = async () => {
-  const news = [];
+  const newsList:News[] = [];
   const db = firebase.firestore();
 
   // await the promise
@@ -26,7 +25,7 @@ export const getStaticProps = async () => {
 
   // "then" part after the await
   querySnapshot.forEach(function (doc) {
-    news.push({
+    newsList.push({
       id: doc.id,
       title: doc.data().title,
       description : doc.data().description,
@@ -41,7 +40,7 @@ export const getStaticProps = async () => {
   // will receive `posts` as a prop at build time
   return {
     props: {
-      news,
+      newsList,
     },
   }
 }
