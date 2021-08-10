@@ -42,7 +42,7 @@ export default function NewsListTemplate(props: News[]) {
           </THead>
           <TBody>
           {props.newsList.map((item, index) => (
-            <TR key={item.id}>
+            <TR key={item.key}>
               <TD>
                 <Image
                   src="/images/photo1.jpg"
