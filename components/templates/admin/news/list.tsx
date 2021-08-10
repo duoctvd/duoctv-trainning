@@ -7,7 +7,7 @@ import Link from "next/link";
 import {News} from "../../../../models/news";
 import { InferGetStaticPropsType } from 'next';
 
-export default function NewsListTemplate(props: News[]) {
+export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
   //  console.log(props);
 
     // props.newsList.forEach(function (value) {
@@ -41,7 +41,7 @@ export default function NewsListTemplate(props: News[]) {
             </TR>
           </THead>
           <TBody>
-          {props.newsList.map((item, index) => (
+          {newsList.map((item, index) => (
             <TR key={item.key}>
               <TD>
                 <Image
