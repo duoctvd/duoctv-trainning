@@ -5,14 +5,8 @@ import Footer from "../../../../components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import {News} from "../../../../models/news";
-import { InferGetStaticPropsType } from 'next';
 
 export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
-  //  console.log(props);
-
-    // props.newsList.forEach(function (value) {
-    //     console.log(value.id);
-    // });
     return (
       <>
       <Head>
@@ -42,7 +36,7 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
           </THead>
           <TBody>
           {newsList.map((item, index) => (
-            <TR key={item.key}>
+            <TR key={item.id}>
               <TD>
                 <Image
                   src="/images/photo1.jpg"
@@ -54,7 +48,7 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
               <TD>{item.title}</TD>
               <TD>{item.description}</TD>
               <TD>
-              <Link href={`/admin/news/form/${item.key}`} passHref>
+              <Link href={`/admin/news/form/${item.id}`} passHref>
                 <Button>Edit</Button>
                 </Link>
               </TD>

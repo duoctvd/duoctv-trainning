@@ -1,195 +1,45 @@
 import React from "react";
-import Head from "next/head";
 import styled from "styled-components";
-import Footer from "../../../../components/Footer";
 import "firebase/auth";
-import { useForm, SubmitHandler } from "react-hook-form";
-import Link from "next/link";
 import { firebase } from "../../../../firebase";
 import "firebase/firestore";
-import { useRouter } from 'next/router';
 import {News} from "../../../../models/news";
+import NewsFormTemplate from "../../../../components/templates/admin/news/form";
 
 
-function Form(data: any) {
+function Form(props: { news: News }) {
     console.log('edit');
-    console.log(data);
-
-    const db = firebase.firestore();
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm<News>();
-    const onSubmit: SubmitHandler<News> = data => {
-      db.collection("news").add({
-          title: data.title,
-          description: data.description,
-          openFlag: 1,
-          delFlag: 0
-      })
-      .then((docRef) => {
-          alert("Document written with ID: "+ docRef.id +"("+data.title+")");
-          console.log("Document written with ID: ", docRef.id);
-      })
-      .catch((error) => {
-          alert("ERROR");
-          console.error("Error adding document: ", error);
-      });
-    };
-  
-    return (
-      <>
-        <Head>
-          <Title>News Edit Form</Title>
-        </Head>
-        <Heading>News Edit Form</Heading>
-  
-        <Container>
-          <FormGroup onSubmit={handleSubmit(onSubmit)}>
-            <Label htmlFor="title">Title</Label>
-            <Input
-              {...register("title", {
-                required: { value: true, message: "Title is required" },
-              })}
-              id="title"
-              placeholder="please input title"
-            />
-            {errors.title && <PValidation>{errors.title.message}</PValidation>}
-  
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              {...register("description", {
-                required: { value: true, message: "Desciption is required" },
-              })}
-              id="description"
-            />
-            {errors.description && <PValidation>{errors.description.message}</PValidation>}
-  
-            <Label htmlFor="photo">Photo</Label>
-            <Input
-              {...register("photo", {
-                required: { value: false, message: "Photo is required" },
-              })}
-              id="photo"
-              type="file"
-            />
-            {errors.photo && <PValidation>{errors.photo.message}</PValidation>}
-  
-            <InputButton type="submit">Submit</InputButton>
-  
-            <Link href={`/admin/news/list`} passHref>
-              <Button>Back</Button>
-            </Link>
-          </FormGroup>
-        </Container>
-        <Footer />
-      </>
-    );
+    return <NewsFormTemplate news={props.news} mode="edit"/>;
+    
   }
 
-  export async function getServerSideProps() {
-    // const res = await fetch('https://api.jsonbin.io/b/600c5ab8bca934583e40b908')
-    // const data = await res.json()
+  export async function getServerSideProps(context: any) {
   
-    // if (!data) {
-    //   return {
-    //     notFound: true,
-    //   }
-    // }
+    const idNews= context.query.id;
 
-    
-    const data =  {
-      "stars": [
-          {
-          "name": "Sun",
-          "id": 1,
-          }
-      ],
-      "planets": [ 
-      {
-          "name": "Mercury",
-          "id": 2,
-      }
-      ],
-      "moons": [  
-      {
-          "name": "Moon",
-          "id": 3,
-      }
-      ]
-  };
-  // const data = await res.json();
-  console.warn(data);
+    var news:News = {id: '', title: '', description: ''};
+    const db = firebase.firestore();
+    var docRef = await db.collection("news").doc(idNews);
+
+    await docRef.get().then((doc) => {
+        if (doc.exists) {
+          news.id =  doc.id;
+          news.title = doc.data().title;
+          news.description =  doc.data().description;
+        } else {
+            // doc.data() will be undefined in this case
+            console.warn("No such document!");
+        }
+    }).catch((error) => {
+        console.warn("Error getting document:", error);
+    });
+
     return {
-      props: {data}, // will be passed to the page component as props
+      props: {news}, // will be passed to the page component as props
     }
   }
 
 
   export default Form
   
-  const Heading = styled.h1`
-    font-size: 2em;
-    text-align: center;
-    color: palevioletred;
-  `;
-  
-  const Title = styled.title``;
-  
-  const Container = styled.div`
-    text-align: center;
-    padding: 0 0.5rem;
-    align-items: center;
-  `;
-  
-  const FormGroup = styled.form`
-    width: 40%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  `;
-  
-  const Input = styled.input`
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid black;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    font-size: 14px;
-  `;
-  
-  const Label = styled.label`
-    line-height: 2;
-    text-align: left;
-    display: block;
-    margin-bottom: 13px;
-    margin-top: 20px;
-    color: black;
-    font-size: 20px;
-    font-weight: 200;
-  `;
-  const Textarea = styled(Input)`
-    height: 100px;
-  `;
-  
-  const PValidation = styled.p`
-    color: red;
-    text-align: left;
-  `;
-  
-  const Button = styled.button`
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid black;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    cursor: pointer;
-  `;
-  
-  const InputButton = styled(Button)``;
+ 

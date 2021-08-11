@@ -1,5 +1,5 @@
 export interface News {
-    key: string;
+    id: string;
     title: string;
     description: string;
     photo?: string;
