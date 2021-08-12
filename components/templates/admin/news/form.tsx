@@ -7,7 +7,7 @@ import {News} from "../../../../models/news";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { firebase } from "../../../../firebase";
 import "firebase/firestore";
-
+import { InsertNews } from '../../../../firestore/news/insertNews';
 
 interface Props {
     news: News;
@@ -25,20 +25,34 @@ export default function NewsFormTemplate({ news, mode }: Props) {
     const db = firebase.firestore();
     if(mode == 'addnew')
     {
-        db.collection("news").add({
-            title: data.title,
-            description: data.description,
-            openFlag: 1,
-            delFlag: 0
-        })
-        .then((docRef) => {
-            alert("Document written with ID: "+ docRef.id +"("+data.title+")");
-            console.log("Document written with ID: ", docRef.id);
-        })
-        .catch((error) => {
-            alert("ERROR");
-            console.error("Error adding document: ", error);
-        });
+      const docRef = InsertNews({
+          title: data.title,
+          description: data.description,
+          openFlag: true,
+          delFlag: false
+      });
+
+      if(docRef)
+      {
+        // alert("Document written with ID: "+ docRef.id +"("+data.title+")");
+        console.log("Document written with ID: ", docRef);
+      }
+
+     
+      // db.collection("news").add({
+        //     title: data.title,
+        //     description: data.description,
+        //     openFlag: 1,
+        //     delFlag: 0
+        // })
+        // .then((docRef) => {
+        //     alert("Document written with ID: "+ docRef.id +"("+data.title+")");
+        //     console.log("Document written with ID: ", docRef.id);
+        // })
+        // .catch((error) => {
+        //     alert("ERROR");
+        //     console.error("Error adding document: ", error);
+        // });
     } else if(mode == 'edit')
     {
          // To update age and favorite color:

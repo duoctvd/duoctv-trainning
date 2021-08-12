@@ -8,6 +8,7 @@ import "firebase/firestore";
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 import { InferGetStaticPropsType } from 'next';
 import {News} from "../../../models/news";
+import { RetrieveNews } from '../../../firestore/news/retrieveNews';
 
 
 function List({ newsList }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -18,10 +19,8 @@ export default List
 
 export const getStaticProps = async () => {
   const newsList:News[] = [];
-  const db = firebase.firestore();
-
   // await the promise
-  const querySnapshot = await db.collection('news').get();
+  const querySnapshot = await RetrieveNews();
 
   // "then" part after the await
   querySnapshot.forEach(function (doc) {
@@ -30,12 +29,10 @@ export const getStaticProps = async () => {
       title: doc.data().title,
       description : doc.data().description,
     });
-    // console.warn("Document keys:", doc.id);
     console.warn(doc.data());
 
   })
 
-  // console.log(posts)
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
   return {
