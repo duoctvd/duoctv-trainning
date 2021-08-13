@@ -6,6 +6,8 @@ import {News} from "../../models/news";
 export const InsertNews = async (news: News) => {
     const db = firebase.firestore();
 
-    return await db.collection("news").add(news);
+    const doc = await db.collection("news").add(news);
+    
+    return doc.id;
 
 }

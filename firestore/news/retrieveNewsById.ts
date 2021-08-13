@@ -6,10 +6,18 @@ import {News} from "../../models/news";
 
 export const RetrieveNewsById = async (id:string) => {
     const db = firebase.firestore();
+    const news:News = {id: '', title: '', description: ''};
 
     var docRef = await db.collection("news").doc(id);
 
-    return docRef;
+    const doc = await docRef.get();
+
+    news.id =  doc.id;
+    news.title = doc.data()?.title;
+    news.description =  doc.data()?.description;
+
+
+    return news;
 
     // var news:News = {id: '', title: '', description: ''};
 
