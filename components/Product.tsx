@@ -5,6 +5,7 @@ interface Props {
   id: number;
   name: string;
   photo: string;
+  description: string;
   bgrColor: string;
 }
 
@@ -21,7 +22,7 @@ export default function Product(props: Props) {
         height={200}
       />
       <Description>
-        This is article {props.id} - this text for deploy checking
+      {props.description}
       </Description>
     </Container>
   );

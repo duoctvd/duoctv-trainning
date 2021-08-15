@@ -4,22 +4,16 @@ import "firebase/firestore";
 import {News} from "../../models/news";
 
 
-export const RetrieveNewsById = async (id:string) => {
+export const RetrieveNewsById = async (id:string): Promise<News> => {
     const db = firebase.firestore();
-    const news:News = {id: '', title: '', description: ''};
 
-    var docRef = await db.collection("news").doc(id);
+    var doc = await db.collection("news").doc(id).get();
 
-    const doc = await docRef.get();
-
-    news.id =  doc.id;
-    news.title = doc.data()?.title;
-    news.description =  doc.data()?.description;
-
-
-    return news;
-
-    // var news:News = {id: '', title: '', description: ''};
+    return {
+        id:  doc.id,
+        title: doc.data()?.title,
+        description:  doc.data()?.description
+    } as News;
 
     // await docRef.get().then((doc) => {
     //     if (doc.exists) {

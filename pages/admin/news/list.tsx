@@ -18,20 +18,9 @@ function List({ newsList }: InferGetStaticPropsType<typeof getStaticProps>) {
 export default List
 
 export const getStaticProps = async () => {
-  const newsList:News[] = [];
+  var newsList:News[] = [];
   // await the promise
-  const querySnapshot = await RetrieveNews();
-
-  // "then" part after the await
-  querySnapshot.forEach(function (doc) {
-    newsList.push({
-      id: doc.id,
-      title: doc.data().title,
-      description : doc.data().description,
-    });
-    console.warn(doc.data());
-
-  })
+  newsList = await RetrieveNews();
 
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time

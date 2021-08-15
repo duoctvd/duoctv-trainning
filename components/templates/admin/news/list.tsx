@@ -5,8 +5,21 @@ import Footer from "../../../../components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import {News} from "../../../../models/news";
+import { firebase } from "../../../../firebase";
+import "firebase/firestore";
+import { useRouter } from 'next/router';
+import { DeleteNewsById } from '../../../../firestore/news/deleteNewsById';
 
 export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
+  const router = useRouter();
+
+  async function fDeleteNewsById(id: string) {
+
+    await DeleteNewsById(id);
+    alert("Document successfully deleted!"+id);
+    router.reload();
+   
+  }
     return (
       <>
       <Head>
@@ -53,8 +66,8 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
                 </Link>
               </TD>
               <TD>
-              <Link href={`/admin/top`} passHref>
-                <Button>Delete</Button>
+              <Link href="#" passHref>
+                <Button onClick={(e) => fDeleteNewsById(`${item.id}`)}>Delete</Button>
               </Link>
               </TD>
             </TR>

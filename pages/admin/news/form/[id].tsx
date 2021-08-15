@@ -21,21 +21,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   news = await RetrieveNewsById(idNews);
 
-  // await docRef.get().then((doc) => {
-  //     if (doc.exists) {
-  //       news.id =  doc.id;
-  //       news.title = doc.data()?.title;
-  //       news.description =  doc.data()?.description;
-  //     return doc;
-  //     } else {
-  //         console.warn("No such document!");
-  //     }
-  // }).catch((error) => {
-  //     console.warn("Error getting document:", error);
-  // });
-
-
-
   return {
     props: {news}, // will be passed to the page component as props
   }

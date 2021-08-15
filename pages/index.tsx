@@ -5,8 +5,14 @@ import Footer from "../components/Footer";
 import Link from "next/link";
 import { firebase } from "../firebase";
 import "firebase/auth";
+import { InferGetStaticPropsType } from 'next';
+import { GetStaticProps } from 'next';
+import {News} from "../models/news";
+import { RetrieveNews } from '../firestore/news/retrieveNews';
 
-export default function Home() {
+function Home({ newsList }: InferGetStaticPropsType<typeof getStaticProps>) {
+
+  console.log(newsList);
   // [START auth_current_user]
   let isLoggedIn = false;
   let user = firebase.auth().currentUser;
@@ -27,30 +33,16 @@ export default function Home() {
       <Main>
         <Heading>Welcome to duoctv first training!</Heading>
         <ProducGrid>
+        {newsList.map((item, index) => (
           <Product
-            id={Number(1)}
+            key={item.id}
+            id={item.id}
             photo="photo1.jpg"
-            name="Article 1"
+            name={item.title}
+            description={item.description}
             bgrColor=""
           />
-          <Product
-            id={Number(2)}
-            photo="photo2.jpg"
-            name="Article 2"
-            bgrColor="yellow"
-          />
-          <Product
-            id={Number(3)}
-            photo="photo3.jpg"
-            name="Article 3"
-            bgrColor="green"
-          />
-          <Product
-            id={Number(3)}
-            photo="photo4.jpg"
-            name="Article 4"
-            bgrColor="pink"
-          />
+        ))} 
         </ProducGrid>
 
         {!isLoggedIn && (
@@ -70,6 +62,29 @@ export default function Home() {
     </Container>
   );
 }
+
+export default Home;
+
+
+export const getStaticProps: GetStaticProps = async () => {
+  var newsList:News[] = [];
+  // await the promise
+  newsList = await RetrieveNews();
+
+  var newsList:News[] = [];
+  // await the promise
+  newsList = await RetrieveNews();
+
+  return {
+    props: {
+      newsList,
+    },
+  }
+
+}
+
+
+
 
 const Container = styled.div`
   min-height: 100vh;
