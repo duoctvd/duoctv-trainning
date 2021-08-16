@@ -34,10 +34,7 @@ export default function NewsFormTemplate({ news, mode }: Props) {
       };
       const insertId = InsertNews(news);
 
-      if(insertId)
-      {
-        alert("Document written"+insertId);
-      }
+      alert("Document written ");
 
       // db.collection("news").add({
       //       title: data.title,

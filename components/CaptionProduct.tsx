@@ -1,17 +1,12 @@
 import styled from "styled-components";
+import {News} from "../models/news";
 
-interface Props {
-  id: number;
-  name: string;
-  photo: string;
-  bgrColor: string;
-}
 
-export default function CaptionProduct(props: Props) {
+export default function CaptionProduct({ news }: { news: News }) {
   return (
     <Container>
-      <Productname>Article {props.id}</Productname>
-      <Description>This is article {props.id} detail</Description>
+      <Productname>{news.title}</Productname>
+      <Description>{news.description}</Description>
     </Container>
   );
 }

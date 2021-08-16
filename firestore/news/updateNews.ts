@@ -9,7 +9,6 @@ import {News} from "../../models/news";
 export const UpdateNews = async(news: News): Promise<void> => {
    
     const db = firebase.firestore();
-
     const dataUpdate:News = {
         title: news.title,
         description: news.description

@@ -10,7 +10,6 @@ import { InferGetServerSidePropsType } from 'next';
 import { RetrieveNewsById } from '../../../../firestore/news/retrieveNewsById';
 
 function Form({ news }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    console.log('edit');
     return <NewsFormTemplate news={news} mode="edit"/>;
     
 }

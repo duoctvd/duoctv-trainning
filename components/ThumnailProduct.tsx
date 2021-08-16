@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import CaptionProduct from "./CaptionProduct";
 import Image from "next/image";
+import {News} from "../models/news";
 
-export default function ThumnailProduct() {
+export default function ThumnailProduct({ news }: { news: News }) {
   return (
     <Container>
       <Image
@@ -11,15 +12,13 @@ export default function ThumnailProduct() {
         width={200}
         height={200}
       />
-      <CaptionProduct
-        id={Number(1)}
-        photo="photo1.jpg"
-        name="Article 1"
-        bgrColor=""
-      />
+      <CaptionProduct news={news}/>
     </Container>
   );
 }
+
+
+
 
 const Container = styled.div`
   display: block;
@@ -29,4 +28,5 @@ const Container = styled.div`
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
+  text-align: center;
 }`;

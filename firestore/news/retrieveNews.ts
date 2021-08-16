@@ -2,12 +2,18 @@ import { firebase } from "../../firebase";
 import "firebase/firestore";
 import {News} from "../../models/news";
 
-export const RetrieveNews = async (): Promise<News[]> => {
+export const RetrieveNews = async (limit = 0): Promise<News[]> => {
 
     const newsList:News[] = [];
 
     const db = firebase.firestore();
-    const querySnapshot = await db.collection('news').get();
+    
+    if(limit > 0)
+    {
+        var querySnapshot = await db.collection('news').limit(limit).get();
+    } else {
+        var querySnapshot = await db.collection('news').get();
+    }
 
     // "then" part after the await
     querySnapshot.forEach(function (doc) {

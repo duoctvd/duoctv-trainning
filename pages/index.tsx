@@ -69,12 +69,7 @@ export default Home;
 export const getStaticProps: GetStaticProps = async () => {
   var newsList:News[] = [];
   // await the promise
-  newsList = await RetrieveNews();
-
-  var newsList:News[] = [];
-  // await the promise
-  newsList = await RetrieveNews();
-
+  newsList = await RetrieveNews(4);
   return {
     props: {
       newsList,
@@ -82,9 +77,6 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 
 }
-
-
-
 
 const Container = styled.div`
   min-height: 100vh;
