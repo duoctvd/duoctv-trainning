@@ -13,6 +13,8 @@ export default function TopTemplate({ newsList }: { newsList: News[] }) {
     let isLoggedIn = false;
     let user = firebase.auth().currentUser;
 
+    console.log(newsList);
+
     if (user != null) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
@@ -32,11 +34,7 @@ export default function TopTemplate({ newsList }: { newsList: News[] }) {
             {newsList.map((item, index) => (
               <Product
                 key={item.id}
-                id={item.id}
-                photo="photo1.jpg"
-                name={item.title}
-                description={item.description}
-                bgrColor=""
+                news={item}
               />
             ))} 
             </ProducGrid>

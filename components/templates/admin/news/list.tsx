@@ -14,13 +14,14 @@ import { useEffect } from 'react';
 export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
   const router = useRouter();
 
-  const handleDelete = (e, id:string) => {
+  const handleDelete = (id:string) => (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     DeleteNewsById(id);
     alert("Document successfully deleted!"+id);
     router.replace('/admin/news/list');
    
   }
+
     return (
       <>
       <Head>
@@ -68,7 +69,9 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
               </TD>
               <TD>
               <Link href="#" passHref>
-                <Button onClick={(e) => {handleDelete(e, `${item.id}`)}}>Delete</Button>
+                <Button onClick={() => handleDelete(`${item.id}`)}>Delete</Button>
+
+                {/* onClick={() => handleSaveAll(currRow, fileToUpload)}> */}
               </Link>
               </TD>
             </TR>

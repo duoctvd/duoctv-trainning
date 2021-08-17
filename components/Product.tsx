@@ -1,28 +1,21 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-interface Props {
-  id: string;
-  name: string;
-  photo: string;
-  description: string;
-  bgrColor: string;
-}
-
-export default function Product(props: Props) {
+import {News} from "../models/news";
+export default function Product({ news }: { news: News }) {
   return (
     <Container>
-      <Link href={`/article/${props.id}`} passHref>
-        <ProductName>{props.name} &rarr; </ProductName>
+      <Link href={`/article/${news.id}`} passHref>
+        <ProductName>{news.title} &rarr; </ProductName>
       </Link>
       <Image
-        src={`/images/${props.photo}`}
+        src={`/images/photo1.jpg`}
         alt="Picture of the product1"
         width={200}
         height={200}
       />
       <Description>
-      {props.description}
+      {news.description}
       </Description>
     </Container>
   );
