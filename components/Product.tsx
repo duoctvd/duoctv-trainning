@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 interface Props {
-  id: number;
+  id: string;
   name: string;
   photo: string;
   description: string;

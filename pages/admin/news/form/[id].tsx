@@ -1,7 +1,5 @@
 import React from "react";
-import styled from "styled-components";
 import "firebase/auth";
-import { firebase } from "../../../../firebase";
 import "firebase/firestore";
 import {News} from "../../../../models/news";
 import NewsFormTemplate from "../../../../components/templates/admin/news/form";
@@ -10,7 +8,7 @@ import { InferGetServerSidePropsType } from 'next';
 import { RetrieveNewsById } from '../../../../firestore/news/retrieveNewsById';
 
 function Form({ news }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    return <NewsFormTemplate news={news} mode="edit"/>;
+    return <NewsFormTemplate news={news}/>;
     
 }
 

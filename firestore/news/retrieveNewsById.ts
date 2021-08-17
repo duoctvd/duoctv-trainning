@@ -5,9 +5,8 @@ import {News} from "../../models/news";
 
 
 export const RetrieveNewsById = async (id:string): Promise<News> => {
-    const db = firebase.firestore();
 
-    var doc = await db.collection("news").doc(id).get();
+    const doc = await firebase.firestore().collection("news").doc(id).get();
 
     return {
         id:  doc.id,

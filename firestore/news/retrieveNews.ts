@@ -6,14 +6,14 @@ export const RetrieveNews = async (limit = 0): Promise<News[]> => {
 
     const newsList:News[] = [];
 
-    const db = firebase.firestore();
+    let query = firebase.firestore().collection('news');
     
     if(limit > 0)
     {
-        var querySnapshot = await db.collection('news').limit(limit).get();
-    } else {
-        var querySnapshot = await db.collection('news').get();
+        //@ts-ignore
+        query = query.limit(limit)
     }
+    const  querySnapshot = await query.get();
 
     // "then" part after the await
     querySnapshot.forEach(function (doc) {

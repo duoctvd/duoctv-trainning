@@ -8,6 +8,6 @@ import NewsFormTemplate from "../../../../components/templates/admin/news/form";
 export default function Form() {
   var news:News = {id: '', title: '', description: ''};
   console.log('addnew');
-  return <NewsFormTemplate news={news} mode="addnew"/>;
+  return <NewsFormTemplate news={news}/>;
 }
 

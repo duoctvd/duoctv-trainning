@@ -12,10 +12,9 @@ import { UpdateNews } from '../../../../firestore/news/updateNews';
 
 interface Props {
     news: News;
-    mode?: string; 
 };
 
-export default function NewsFormTemplate({ news, mode }: Props) {
+export default function NewsFormTemplate({ news }: Props) {
     const {
         register,
         handleSubmit,
@@ -24,15 +23,15 @@ export default function NewsFormTemplate({ news, mode }: Props) {
     
     const onSubmit: SubmitHandler<News> = data => {
     const db = firebase.firestore();
-    if(mode == 'addnew')
+    if(!data.id)
     {
-      news = {
+      const insertData:News = {
         title: data.title,
         description: data.description,
         openFlag: true,
         delFlag: false
       };
-      const insertId = InsertNews(news);
+      const insertId = InsertNews(insertData);
 
       alert("Document written ");
 
@@ -50,16 +49,16 @@ export default function NewsFormTemplate({ news, mode }: Props) {
       //       alert("ERROR");
       //       console.error("Error adding document: ", error);
       //   });
-    } else if(mode == 'edit')
-    {
+    } else {
          // To update age and favorite color:
 
-        news = {
+         const updateData:News = {
+            id: news.id,
             title: data.title,
             description: data.description,
         };
 
-        UpdateNews(news);
+        UpdateNews(updateData);
 
         alert("Document successfully updated!");
 
@@ -79,6 +78,9 @@ export default function NewsFormTemplate({ news, mode }: Props) {
     
           <Container>
             <FormGroup onSubmit={handleSubmit(onSubmit)}>
+            <Input
+                defaultValue={news.id}
+              />
               <Label htmlFor="title">Title</Label>
               <Input
                 defaultValue={news.title}
