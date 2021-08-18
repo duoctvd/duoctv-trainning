@@ -80,6 +80,7 @@ export default function NewsFormTemplate({ news }: Props) {
             <FormGroup onSubmit={handleSubmit(onSubmit)}>
             <Input
                 defaultValue={news.id}
+                type="hidden"
               />
               <Label htmlFor="title">Title</Label>
               <Input
