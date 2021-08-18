@@ -23,7 +23,7 @@ export default function NewsFormTemplate({ news }: Props) {
     
     const onSubmit: SubmitHandler<News> = data => {
     const db = firebase.firestore();
-    if(!data.id)
+    if(!news.id)
     {
       const insertData:News = {
         title: data.title,
@@ -78,9 +78,8 @@ export default function NewsFormTemplate({ news }: Props) {
     
           <Container>
             <FormGroup onSubmit={handleSubmit(onSubmit)}>
-            <Input
+            <InputHiden
                 defaultValue={news.id}
-                type="hidden"
               />
               <Label htmlFor="title">Title</Label>
               <Input
@@ -155,6 +154,10 @@ const Input = styled.input`
   padding: 10px 15px;
   margin-bottom: 10px;
   font-size: 14px;
+`;
+
+const InputHiden = styled(Input)`
+  display: none;
 `;
 
 const Label = styled.label`

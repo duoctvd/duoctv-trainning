@@ -5,16 +5,14 @@ import Footer from "../../../../components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import {News} from "../../../../models/news";
-import { firebase } from "../../../../firebase";
 import "firebase/firestore";
 import { useRouter } from 'next/router';
 import { DeleteNewsById } from '../../../../firestore/news/deleteNewsById';
-import { useEffect } from 'react';
 
 export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
   const router = useRouter();
 
-  const handleDelete = (id:string) => (e: React.FormEvent<HTMLInputElement>) => {
+  const handleDelete = (id:string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     DeleteNewsById(id);
     alert("Document successfully deleted!"+id);
@@ -69,9 +67,8 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
               </TD>
               <TD>
               <Link href="#" passHref>
+              {/* <Button onClick={handleDelete(`${item.id}`)}>Delete</Button> */}
                 <Button onClick={() => handleDelete(`${item.id}`)}>Delete</Button>
-
-                {/* onClick={() => handleSaveAll(currRow, fileToUpload)}> */}
               </Link>
               </TD>
             </TR>
