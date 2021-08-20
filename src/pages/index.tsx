@@ -21,6 +21,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       newsList,
     },
+    revalidate: 5, // In seconds
   }
 
 }
