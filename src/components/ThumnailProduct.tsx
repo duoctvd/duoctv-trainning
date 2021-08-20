@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import CaptionProduct from "./CaptionProduct";
 import Image from "next/image";
-import {News} from "../models/news";
+import {News} from "../../models/news";
 
 export default function ThumnailProduct({ news }: { news: News }) {
   return (
