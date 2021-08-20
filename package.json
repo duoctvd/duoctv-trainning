@@ -6,7 +6,9 @@
     "dev": "next dev -p 2311",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "eslint": "eslint pages --ext .ts,.tsx,.js,.jsx --ignore-path ./.gitignore . --max-warnings=0",
+    "eslint:fix": "yarn eslint --fix",
+    "prettier": "prettier --write \"{,pages/**/,components/**}*.{js,jsx,ts,tsx,json,yaml,md}\""
   },
   "dependencies": {
     "firebase": "^8.7.1",

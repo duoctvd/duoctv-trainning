@@ -4,17 +4,27 @@ import styled from "styled-components";
 import Footer from "../../../../components/Footer";
 import Image from "next/image";
 import Link from "next/link";
-import {News} from "../../../../models/news";
+import {News} from "../../../../../models/news";
 import "firebase/firestore";
 import { useRouter } from 'next/router';
-import { DeleteNewsById } from '../../../../firestore/news/deleteNewsById';
+import { DeleteNewsById } from '../../../../../firestore/news/deleteNewsById';
 
 export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
   const router = useRouter();
 
-  const handleDelete = (id:string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    DeleteNewsById(id);
+  // const handleDelete = (id:string) => () => {
+  //   // e.preventDefault();
+  //   alert(11);
+  //   DeleteNewsById(id);
+  //   alert("Document successfully deleted!"+id);
+  //   router.replace('/admin/news/list');
+   
+  // }
+
+  
+  async function handleDelete(id:string){
+    // e.preventDefault();
+    await DeleteNewsById(id);
     alert("Document successfully deleted!"+id);
     router.replace('/admin/news/list');
    
@@ -66,10 +76,10 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
                 </Link>
               </TD>
               <TD>
-              <Link href="#" passHref>
+              {/* <Link href="#" passHref> */}
               {/* <Button onClick={handleDelete(`${item.id}`)}>Delete</Button> */}
                 <Button onClick={() => handleDelete(`${item.id}`)}>Delete</Button>
-              </Link>
+              {/* </Link> */}
               </TD>
             </TR>
            ))} 
