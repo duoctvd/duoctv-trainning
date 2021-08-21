@@ -1,5 +1,5 @@
 
-import { firebase } from "../../firebase";
+import { firebase } from "../../../firebase";
 import "firebase/firestore";
 import {News} from "../../models/news";
 

@@ -1,4 +1,4 @@
-import { firebase } from "../../firebase";
+import { firebase } from "../../../firebase";
 import "firebase/firestore";
 import {News} from "../../models/news";
 
@@ -6,12 +6,15 @@ export const RetrieveNews = async (limit = 0): Promise<News[]> => {
 
     const newsList:News[] = [];
 
-    let query = firebase.firestore().collection('news');
+    let query = firebase.firestore().collection('news').orderBy("title", 'desc').startAt('news 6 title');
     
     if(limit > 0)
     {
         //@ts-ignore
         query = query.limit(limit)
+    } else {
+        //@ts-ignore
+        query = query.limit(2)
     }
     const  querySnapshot = await query.get();
 

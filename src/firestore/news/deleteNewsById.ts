@@ -1,5 +1,5 @@
 
-import { firebase } from "../../firebase";
+import { firebase } from "../../../firebase";
 import "firebase/firestore";
 
 export const DeleteNewsById = async(id: string): Promise<void> => {

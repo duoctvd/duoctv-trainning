@@ -4,24 +4,49 @@ import styled from "styled-components";
 import Footer from "../../../../components/Footer";
 import Image from "next/image";
 import Link from "next/link";
-import {News} from "../../../../../models/news";
+import {News} from "../../../../models/news";
 import "firebase/firestore";
 import { useRouter } from 'next/router';
-import { DeleteNewsById } from '../../../../../firestore/news/deleteNewsById';
+import { DeleteNewsById } from '../../../../firestore/news/deleteNewsById';
+import {useState} from 'react';
+import { NewsPagination } from '../../../../firestore/news/newsPagination';
 
 export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
   const router = useRouter();
+  var [newsL,setnewsList] = useState(newsList);
+  const [end,setEnd] = useState(false);
+  const [start,setStart] = useState(false);
+  const newNewsList:News[] =[];
 
-  // const handleDelete = (id:string) => () => {
-  //   // e.preventDefault();
-  //   alert(11);
-  //   DeleteNewsById(id);
-  //   alert("Document successfully deleted!"+id);
-  //   router.replace('/admin/news/list');
-   
-  // }
+  const nextPage = async ()=>{
+    const newNewsList = await NewsPagination('next', newsL);
+    newsL = [];
+    setnewsList(newsL.concat(newNewsList));
+    console.log(newsL);
+    // router.push('/admin/news/list');
+    
+    if(newsL.length < 2){
+      setEnd(true)
+    }
+
+  }
+
+  const prevPage = async ()=>{
+    const newNewsList = await NewsPagination('prev', newsL);
+    newsL = [];
+    setnewsList(newsL.concat(newNewsList));
+    console.log(newsL);
+    
+    // if(newsL.length < 2){
+    //   setEnd(true)
+    // }
+
+  }
 
   
+
+  // console.log(newsL);
+
   async function handleDelete(id:string){
     // e.preventDefault();
     await DeleteNewsById(id);
@@ -58,7 +83,7 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
             </TR>
           </THead>
           <TBody>
-          {newsList.map((item, index) => (
+          {newsL.map((item, index) => (
             <TR key={item.id}>
               <TD>
                 <Image
@@ -86,12 +111,14 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
           </TBody>
         </StyledTable>
         <Pagination>
-          <PaginationStep>&laquo;</PaginationStep>
-          <PaginationStep>1</PaginationStep>
+          <PaginationStep onClick={prevPage}>&laquo; Prev</PaginationStep>
+          {/* <PaginationStep>1</PaginationStep>
           <PaginationStep>2</PaginationStep>
           <PaginationStep>3</PaginationStep>
-          <PaginationStep>4</PaginationStep>
-          <PaginationStep>&raquo;</PaginationStep>
+          <PaginationStep>4</PaginationStep> */}
+          {/* {end==false? */}
+          <PaginationStep onClick={nextPage}>Next &raquo;</PaginationStep>
+          {/* :''}  */}
         </Pagination>
         < br/>
         <Link href={`/admin/top`} passHref>
