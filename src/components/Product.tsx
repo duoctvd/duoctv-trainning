@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-import {News} from "../../models/news";
+import {News} from "../models/news";
 export default function Product({ news }: { news: News }) {
   return (
     <Container>
