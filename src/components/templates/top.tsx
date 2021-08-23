@@ -5,58 +5,53 @@ import Footer from "../../components/Footer";
 import Link from "next/link";
 import { firebase } from "../../../firebase";
 import "firebase/auth";
-import {News} from "../../../models/news";
+import { News } from "../../models/news";
 
 export default function TopTemplate({ newsList }: { newsList: News[] }) {
-    
-    // [START auth_current_user]
-    let isLoggedIn = false;
-    let user = firebase.auth().currentUser;
+  // [START auth_current_user]
+  let isLoggedIn = false;
+  let user = firebase.auth().currentUser;
 
-    console.log(newsList);
+  console.log(newsList);
 
-    if (user != null) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        // ...
-        isLoggedIn = true;
-    }
+  if (user != null) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    // ...
+    isLoggedIn = true;
+  }
 
-    return (
-        <Container>
-          <Head>
-            <Title>duoctv trainning</Title>
-          </Head>
-    
-          <Main>
-            <Heading>Welcome to duoctv first training!</Heading>
-            <ProducGrid>
-            {newsList.map((item, index) => (
-              <Product
-                key={item.id}
-                news={item}
-              />
-            ))} 
-            </ProducGrid>
-    
-            {!isLoggedIn && (
-              <Link href={`/login`} passHref>
-                <Button>Log in</Button>
-              </Link>
-            )}
-    
-            {isLoggedIn && (
-              <Link href={`/admin/top`} passHref>
-                <Button>admin</Button>
-              </Link>
-            )}
-          </Main>
-    
-          <Footer />
-        </Container>
-      );
+  return (
+    <Container>
+      <Head>
+        <Title>duoctv trainning</Title>
+      </Head>
+
+      <Main>
+        <Heading>Welcome to duoctv first training!</Heading>
+        <ProducGrid>
+          {newsList.map((item, index) => (
+            <Product key={item.id} news={item} />
+          ))}
+        </ProducGrid>
+
+        {!isLoggedIn && (
+          <Link href={`/login`} passHref>
+            <Button>Log in</Button>
+          </Link>
+        )}
+
+        {isLoggedIn && (
+          <Link href={`/admin/top`} passHref>
+            <Button>admin</Button>
+          </Link>
+        )}
+      </Main>
+
+      <Footer />
+    </Container>
+  );
 }
-
 
 const Container = styled.div`
   min-height: 100vh;

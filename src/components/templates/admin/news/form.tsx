@@ -3,33 +3,32 @@ import Head from "next/head";
 import styled from "styled-components";
 import Footer from "../../../../components/Footer";
 import Link from "next/link";
-import {News} from "../../../../../models/news";
+import { News } from "../../../../models/news";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { firebase } from "../../../../../firebase";
 import "firebase/firestore";
-import { InsertNews } from '../../../../../firestore/news/insertNews';
-import { UpdateNews } from '../../../../../firestore/news/updateNews';
+import { InsertNews } from "../../../../firestore/news/insertNews";
+import { UpdateNews } from "../../../../firestore/news/updateNews";
 
 interface Props {
-    news: News;
-};
+  news: News;
+}
 
 export default function NewsFormTemplate({ news }: Props) {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm<News>();
-    
-    const onSubmit: SubmitHandler<News> = data => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<News>();
+
+  const onSubmit: SubmitHandler<News> = (data) => {
     const db = firebase.firestore();
-    if(!news.id)
-    {
-      const insertData:News = {
+    if (!news.id) {
+      const insertData: News = {
         title: data.title,
         description: data.description,
         openFlag: true,
-        delFlag: false
+        delFlag: false,
       };
       const insertId = InsertNews(insertData);
 
@@ -50,78 +49,77 @@ export default function NewsFormTemplate({ news }: Props) {
       //       console.error("Error adding document: ", error);
       //   });
     } else {
-         // To update age and favorite color:
+      // To update age and favorite color:
 
-         const updateData:News = {
-            id: news.id,
-            title: data.title,
-            description: data.description,
-        };
+      const updateData: News = {
+        id: news.id,
+        title: data.title,
+        description: data.description,
+      };
 
-        UpdateNews(updateData);
+      UpdateNews(updateData);
 
-        alert("Document successfully updated!");
+      alert("Document successfully updated!");
 
-        // db.collection("news").doc(news.id).update()
-        // .then(() => {
-        //     alert("Document successfully updated!");
-        // });
+      // db.collection("news").doc(news.id).update()
+      // .then(() => {
+      //     alert("Document successfully updated!");
+      // });
     }
-    
-    };
-    return (
-        <>
-          <Head>
-            <Title>News Edit Form</Title>
-          </Head>
-          <Heading>News Edit Form</Heading>
-    
-          <Container>
-            <FormGroup onSubmit={handleSubmit(onSubmit)}>
-            <InputHiden
-                defaultValue={news.id}
-              />
-              <Label htmlFor="title">Title</Label>
-              <Input
-                defaultValue={news.title}
-                {...register("title", {
-                  required: { value: true, message: "Title is required" },
-                })}
-                id="title"
-                placeholder="please input title"
-              />
-              {errors.title && <PValidation>{errors.title.message}</PValidation>}
-    
-              <Label htmlFor="description">Description</Label>
-              <Textarea
-                defaultValue={news.description}
-                {...register("description", {
-                  required: { value: true, message: "Desciption is required" },
-                })}
-                id="description"
-              />
-              {errors.description && <PValidation>{errors.description.message}</PValidation>}
-    
-              <Label htmlFor="photo">Photo</Label>
-              <Input
-                {...register("photo", {
-                  required: { value: false, message: "Photo is required" },
-                })}
-                id="photo"
-                type="file"
-              />
-              {errors.photo && <PValidation>{errors.photo.message}</PValidation>}
-    
-              <InputButton type="submit">Submit</InputButton>
-    
-              <Link href={`/admin/news/list`} passHref>
-                <Button>Back</Button>
-              </Link>
-            </FormGroup>
-          </Container>
-          <Footer />
-        </>
-      );
+  };
+  return (
+    <>
+      <Head>
+        <Title>News Edit Form</Title>
+      </Head>
+      <Heading>News Edit Form</Heading>
+
+      <Container>
+        <FormGroup onSubmit={handleSubmit(onSubmit)}>
+          <InputHiden defaultValue={news.id} />
+          <Label htmlFor="title">Title</Label>
+          <Input
+            defaultValue={news.title}
+            {...register("title", {
+              required: { value: true, message: "Title is required" },
+            })}
+            id="title"
+            placeholder="please input title"
+          />
+          {errors.title && <PValidation>{errors.title.message}</PValidation>}
+
+          <Label htmlFor="description">Description</Label>
+          <Textarea
+            defaultValue={news.description}
+            {...register("description", {
+              required: { value: true, message: "Desciption is required" },
+            })}
+            id="description"
+          />
+          {errors.description && (
+            <PValidation>{errors.description.message}</PValidation>
+          )}
+
+          <Label htmlFor="photo">Photo</Label>
+          <Input
+            {...register("photo", {
+              required: { value: false, message: "Photo is required" },
+            })}
+            id="photo"
+            type="file"
+          />
+          {errors.photo && <PValidation>{errors.photo.message}</PValidation>}
+
+          <InputButton type="submit">Submit</InputButton>
+
+          <Link href={`/admin/news/list`} passHref>
+            <Button>Back</Button>
+          </Link>
+        </FormGroup>
+      </Container>
+      <Footer />
+    </>
+  );
 }
 
 const Heading = styled.h1`

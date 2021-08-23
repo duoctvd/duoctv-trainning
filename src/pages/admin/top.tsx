@@ -50,17 +50,17 @@ export default function Top() {
         <Image src={`${photo}`} alt={`${user_name}`} width={200} height={200} />
         <br />
         <ButtonGroup>
-        <Link href={`/admin/news/list`} passHref>
-          <Button>News List</Button>
-        </Link>
-        <br />
-        <Link href={`/`} passHref>
-          <Button>Home</Button>
-        </Link>
-        <br />
-        <Link href={`/logout`} passHref>
-          <Button>Log out!</Button>
-        </Link>
+          <Link href={`/admin/news/list`} passHref>
+            <Button>News List</Button>
+          </Link>
+          <br />
+          <Link href={`/`} passHref>
+            <Button>Home</Button>
+          </Link>
+          <br />
+          <Link href={`/logout`} passHref>
+            <Button>Log out!</Button>
+          </Link>
         </ButtonGroup>
       </Container>
       <Footer />

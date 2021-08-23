@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import CaptionProduct from "./CaptionProduct";
 import Image from "next/image";
-import {News} from "../../models/news";
+import { News } from "../models/news";
 
 export default function ThumnailProduct({ news }: { news: News }) {
   return (
@@ -12,13 +12,10 @@ export default function ThumnailProduct({ news }: { news: News }) {
         width={200}
         height={200}
       />
-      <CaptionProduct news={news}/>
+      <CaptionProduct news={news} />
     </Container>
   );
 }
-
-
-
 
 const Container = styled.div`
   display: block;

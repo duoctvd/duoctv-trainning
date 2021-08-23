@@ -4,34 +4,69 @@ import styled from "styled-components";
 import Footer from "../../../../components/Footer";
 import Image from "next/image";
 import Link from "next/link";
-import {News} from "../../../../../models/news";
+import { News } from "../../../../models/news";
 import "firebase/firestore";
-import { useRouter } from 'next/router';
-import { DeleteNewsById } from '../../../../../firestore/news/deleteNewsById';
+import { useRouter } from "next/router";
+import { DeleteNewsById } from "../../../../firestore/news/deleteNewsById";
+import { useState } from "react";
+import { NewsPagination } from "../../../../firestore/news/newsPagination";
 
 export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
   const router = useRouter();
+  var [newsListResult, setNewsListResult] = useState(newsList);
+  const [end, setEnd] = useState(false);
+  const [start, setStart] = useState(true);
+  const newNewsList: News[] = [];
 
-  // const handleDelete = (id:string) => () => {
-  //   // e.preventDefault();
-  //   alert(11);
-  //   DeleteNewsById(id);
-  //   alert("Document successfully deleted!"+id);
-  //   router.replace('/admin/news/list');
-   
-  // }
+  const nextPage = async () => {
+    setEnd(false);
 
-  
-  async function handleDelete(id:string){
+    const newNewsList = await NewsPagination("next", newsListResult);
+    setNewsListResult((newsListResult = newNewsList));
+    if (newsListResult.length < 2) {
+      setEnd(true);
+    }
+    setStart(false);
+  };
+
+  const prevPage = async () => {
+    setEnd(false);
+    setStart(false);
+    const newNewsList = await NewsPagination("prev", newsListResult);
+    // newsL = newNewsList;
+    setNewsListResult((newsListResult = newNewsList));
+
+    if (newsListResult.length < 2) {
+      setEnd(true);
+    }
+
+    if (arraysMatch(newsListResult, newsList)) {
+      setStart(true);
+    }
+  };
+
+  var arraysMatch = function (arr1: News[] = [], arr2: News[] = []) {
+    // Check if the arrays are the same length
+    if (arr1.length !== arr2.length) return false;
+
+    // Check if all items exist and are in the same order
+    for (var i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) return false;
+    }
+
+    // Otherwise, return true
+    return true;
+  };
+
+  async function handleDelete(id: string) {
     // e.preventDefault();
     await DeleteNewsById(id);
-    alert("Document successfully deleted!"+id);
-    router.replace('/admin/news/list');
-   
+    alert("Document successfully deleted!" + id);
+    router.replace("/admin/news/list");
   }
 
-    return (
-      <>
+  return (
+    <>
       <Head>
         <Title>News List</Title>
       </Head>
@@ -40,13 +75,12 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
       <Container>
         <TotalCount>
           <B>Total: 20 news</B>
-          
+
           <Link href={`/admin/news/form`} passHref>
             <AddNewsButton>Add new</AddNewsButton>
           </Link>
-          
         </TotalCount>
-       
+
         <StyledTable>
           <THead>
             <TR>
@@ -58,53 +92,62 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
             </TR>
           </THead>
           <TBody>
-          {newsList.map((item, index) => (
-            <TR key={item.id}>
-              <TD>
-                <Image
-                  src="/images/photo1.jpg"
-                  alt="Picture of the product"
-                  width={80}
-                  height={80}
-                />
-              </TD>
-              <TD>{item.title}</TD>
-              <TD>{item.description}</TD>
-              <TD>
-              <Link href={`/admin/news/form/${item.id}`} passHref>
-                <Button>Edit</Button>
-                </Link>
-              </TD>
-              <TD>
-              {/* <Link href="#" passHref> */}
-              {/* <Button onClick={handleDelete(`${item.id}`)}>Delete</Button> */}
-                <Button onClick={() => handleDelete(`${item.id}`)}>Delete</Button>
-              {/* </Link> */}
-              </TD>
-            </TR>
-           ))} 
+            {newsListResult.map((item, index) => (
+              <TR key={item.id}>
+                <TD>
+                  <Image
+                    src="/images/photo1.jpg"
+                    alt="Picture of the product"
+                    width={80}
+                    height={80}
+                  />
+                </TD>
+                <TD>{item.title}</TD>
+                <TD>{item.description}</TD>
+                <TD>
+                  <Link href={`/admin/news/form/${item.id}`} passHref>
+                    <Button>Edit</Button>
+                  </Link>
+                </TD>
+                <TD>
+                  {/* <Link href="#" passHref> */}
+                  {/* <Button onClick={handleDelete(`${item.id}`)}>Delete</Button> */}
+                  <Button onClick={() => handleDelete(`${item.id}`)}>
+                    Delete
+                  </Button>
+                  {/* </Link> */}
+                </TD>
+              </TR>
+            ))}
           </TBody>
         </StyledTable>
         <Pagination>
-          <PaginationStep>&laquo;</PaginationStep>
-          <PaginationStep>1</PaginationStep>
+          {start == false ? (
+            <PaginationStep onClick={prevPage}>&laquo; Prev</PaginationStep>
+          ) : (
+            ""
+          )}
+          {/* <PaginationStep>1</PaginationStep>
           <PaginationStep>2</PaginationStep>
           <PaginationStep>3</PaginationStep>
-          <PaginationStep>4</PaginationStep>
-          <PaginationStep>&raquo;</PaginationStep>
+          <PaginationStep>4</PaginationStep> */}
+          {end == false ? (
+            <PaginationStep onClick={nextPage}>Next &raquo;</PaginationStep>
+          ) : (
+            ""
+          )}
         </Pagination>
-        < br/>
+        <br />
         <Link href={`/admin/top`} passHref>
-            <Button>Admin</Button>
+          <Button>Admin</Button>
         </Link>
-        < br/>
+        <br />
       </Container>
-      
+
       <Footer />
     </>
-    );
+  );
 }
-
 
 const Heading = styled.h1`
   font-size: 2em;
