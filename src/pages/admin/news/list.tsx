@@ -11,10 +11,22 @@ import { News } from "../../../models/news";
 import { RetrieveNews } from "../../../firestore/news/retrieveNews";
 import { GetServerSideProps } from "next";
 import { InferGetServerSidePropsType } from "next";
+import "firebase/storage";
 
 function List({
   newsList,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  //  // Create a root reference
+  //  var storageRef = firebase.storage().ref();
+  //  let reader = new FileReader();
+
+  // ;
+  //  // Create a reference to 'mountains.jpg'
+  //  var mountainsRef = storageRef.child('/photo1.jpg');
+  //  mountainsRef.put(reader.readAsText('/photo1.jpg')).then((snapshot) => {
+  //   console.log('Uploaded a blob or file!');
+  // });
+
   return <NewsListTemplate newsList={newsList} />;
 }
 

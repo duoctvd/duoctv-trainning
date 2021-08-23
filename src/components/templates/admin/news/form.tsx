@@ -9,6 +9,7 @@ import { firebase } from "../../../../../firebase";
 import "firebase/firestore";
 import { InsertNews } from "../../../../firestore/news/insertNews";
 import { UpdateNews } from "../../../../firestore/news/updateNews";
+import "firebase/storage";
 
 interface Props {
   news: News;
@@ -21,50 +22,39 @@ export default function NewsFormTemplate({ news }: Props) {
     formState: { errors },
   } = useForm<News>();
 
-  const onSubmit: SubmitHandler<News> = (data) => {
-    const db = firebase.firestore();
+  const onSubmit: SubmitHandler<News> = async (data) => {
+    var newsID = "";
     if (!news.id) {
+      console.log(data.photo);
+
       const insertData: News = {
         title: data.title,
         description: data.description,
         openFlag: true,
         delFlag: false,
       };
-      const insertId = InsertNews(insertData);
-
-      alert("Document written ");
-
-      // db.collection("news").add({
-      //       title: data.title,
-      //       description: data.description,
-      //       openFlag: 1,
-      //       delFlag: 0
-      //   })
-      //   .then((docRef) => {
-      //       cc("Document written with ID: "+ docRef.id +"("+data.title+")");
-      //       console.log("Document written with ID: ", docRef.id);
-      //   })
-      //   .catch((error) => {
-      //       alert("ERROR");
-      //       console.error("Error adding document: ", error);
-      //   });
+      newsID = await InsertNews(insertData);
+      alert("Document written " + newsID);
     } else {
       // To update age and favorite color:
-
+      newsID = news.id;
       const updateData: News = {
         id: news.id,
         title: data.title,
         description: data.description,
       };
-
       UpdateNews(updateData);
-
       alert("Document successfully updated!");
+    }
 
-      // db.collection("news").doc(news.id).update()
-      // .then(() => {
-      //     alert("Document successfully updated!");
-      // });
+    if (data.photo) {
+      const db = firebase.firestore();
+      var storageRef = firebase.storage().ref();
+      // Create a reference to 'mountains.jpg'
+      var photoRef = storageRef.child("images/news/" + newsID + ".jpg");
+      photoRef.put(data.photo[0]).then((snapshot) => {
+        console.log("Uploaded a blob or file!");
+      });
     }
   };
   return (
