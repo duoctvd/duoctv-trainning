@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import Link from "next/link";
 import { firebase } from "../../../firebase";
 import "firebase/auth";
-import {News} from "../../../models/news";
+import {News} from "../../models/news";
 
 export default function TopTemplate({ newsList }: { newsList: News[] }) {
     
