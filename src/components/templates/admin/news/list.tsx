@@ -13,39 +13,56 @@ import { NewsPagination } from '../../../../firestore/news/newsPagination';
 
 export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
   const router = useRouter();
-  var [newsL,setnewsList] = useState(newsList);
+  var [newsListResult,setNewsListResult] = useState(newsList);
   const [end,setEnd] = useState(false);
-  const [start,setStart] = useState(false);
+  const [start,setStart] = useState(true);
   const newNewsList:News[] =[];
 
   const nextPage = async ()=>{
-    const newNewsList = await NewsPagination('next', newsL);
-    newsL = [];
-    setnewsList(newsL.concat(newNewsList));
-    console.log(newsL);
-    // router.push('/admin/news/list');
+    setEnd(false);
     
-    if(newsL.length < 2){
+    const newNewsList = await NewsPagination('next', newsListResult);
+    setNewsListResult(newsListResult = newNewsList);
+    if(newsListResult.length < 2){
       setEnd(true)
     }
+    setStart(false);
 
   }
 
   const prevPage = async ()=>{
-    const newNewsList = await NewsPagination('prev', newsL);
-    newsL = [];
-    setnewsList(newsL.concat(newNewsList));
-    console.log(newsL);
+    setEnd(false);
+    setStart(false);
+    const newNewsList = await NewsPagination('prev', newsListResult);
+    // newsL = newNewsList;
+    setNewsListResult(newsListResult = newNewsList);
+
     
-    // if(newsL.length < 2){
-    //   setEnd(true)
-    // }
+    if(newsListResult.length < 2){
+      setEnd(true)
+    }
+
+    if(arraysMatch(newsListResult, newsList))
+    {
+      setStart(true);
+    }
 
   }
 
-  
+  var arraysMatch = function (arr1:News[] = [], arr2:News[] = []) {
 
-  // console.log(newsL);
+    // Check if the arrays are the same length
+    if (arr1.length !== arr2.length) return false;
+  
+    // Check if all items exist and are in the same order
+    for (var i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) return false;
+    }
+  
+    // Otherwise, return true
+    return true;
+  
+  };
 
   async function handleDelete(id:string){
     // e.preventDefault();
@@ -83,7 +100,7 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
             </TR>
           </THead>
           <TBody>
-          {newsL.map((item, index) => (
+          {newsListResult.map((item, index) => (
             <TR key={item.id}>
               <TD>
                 <Image
@@ -111,14 +128,16 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
           </TBody>
         </StyledTable>
         <Pagination>
+          {start==false?
           <PaginationStep onClick={prevPage}>&laquo; Prev</PaginationStep>
+          :''}
           {/* <PaginationStep>1</PaginationStep>
           <PaginationStep>2</PaginationStep>
           <PaginationStep>3</PaginationStep>
           <PaginationStep>4</PaginationStep> */}
-          {/* {end==false? */}
+          {end==false?
           <PaginationStep onClick={nextPage}>Next &raquo;</PaginationStep>
-          {/* :''}  */}
+          :''}
         </Pagination>
         < br/>
         <Link href={`/admin/top`} passHref>

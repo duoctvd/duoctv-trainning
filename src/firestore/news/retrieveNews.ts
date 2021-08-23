@@ -6,7 +6,7 @@ export const RetrieveNews = async (limit = 0): Promise<News[]> => {
 
     const newsList:News[] = [];
 
-    let query = firebase.firestore().collection('news').orderBy("title", 'desc').startAt('news 6 title');
+    let query = firebase.firestore().collection('news').orderBy("title", 'desc');
     
     if(limit > 0)
     {

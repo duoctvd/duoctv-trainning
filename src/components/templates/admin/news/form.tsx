@@ -3,12 +3,12 @@ import Head from "next/head";
 import styled from "styled-components";
 import Footer from "../../../../components/Footer";
 import Link from "next/link";
-import {News} from "../../../../../models/news";
+import {News} from "../../../../models/news";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { firebase } from "../../../../../firebase";
 import "firebase/firestore";
-import { InsertNews } from '../../../../../firestore/news/insertNews';
-import { UpdateNews } from '../../../../../firestore/news/updateNews';
+import { InsertNews } from '../../../../firestore/news/insertNews';
+import { UpdateNews } from '../../../../firestore/news/updateNews';
 
 interface Props {
     news: News;

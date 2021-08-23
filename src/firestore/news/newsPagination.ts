@@ -16,9 +16,9 @@ export const NewsPagination = async (mode = '', currentNewsList:News[] =[]): Pro
 
     if(mode == 'prev')
     {
-        const last  = currentNewsList[0];
+        const first  = currentNewsList[0];
         //@ts-ignore
-        query = query.orderBy("title", 'desc').startAfter(last.title).limit(2);
+        query = query.orderBy("title", 'desc').endBefore(first.title).limitToLast(2);
     }
     
     const  querySnapshot = await query.get();
