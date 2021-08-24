@@ -23,13 +23,28 @@ export default function NewsFormTemplate({ news }: Props) {
   } = useForm<News>();
 
   const onSubmit: SubmitHandler<News> = async (data) => {
-    var newsID = "";
+    var imagePath = "";
+    if (data.imagePath) {
+      let imageName = await getRandomString(10);
+      const storageRef = await firebase.storage().ref();
+      // Create a reference to 'mountains.jpg'
+      const photoRef = await storageRef.child(
+        "images/news/" + imageName + ".jpg"
+      );
+      let snapshot = await photoRef.put(
+        await stringToArrayBuffer(data.imagePath[0])
+      );
+      imagePath = await snapshot.ref.getDownloadURL();
+    }
+
+    let newsID = "";
     if (!news.id) {
-      console.log(data.photo);
+      console.log(data.imagePath);
 
       const insertData: News = {
         title: data.title,
         description: data.description,
+        imagePath: imagePath,
         openFlag: true,
         delFlag: false,
       };
@@ -42,21 +57,29 @@ export default function NewsFormTemplate({ news }: Props) {
         id: news.id,
         title: data.title,
         description: data.description,
+        imagePath: imagePath,
       };
       UpdateNews(updateData);
       alert("Document successfully updated!");
     }
-
-    if (data.photo) {
-      const db = firebase.firestore();
-      var storageRef = firebase.storage().ref();
-      // Create a reference to 'mountains.jpg'
-      var photoRef = storageRef.child("images/news/" + newsID + ".jpg");
-      photoRef.put(data.photo[0]).then((snapshot) => {
-        console.log("Uploaded a blob or file!");
-      });
-    }
   };
+
+  function getRandomString(length = 5) {
+    var randomChars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var result = "";
+    for (var i = 0; i < length; i++) {
+      result += randomChars.charAt(
+        Math.floor(Math.random() * randomChars.length)
+      );
+    }
+    return result;
+  }
+
+  function stringToArrayBuffer(string = "", encoding = "UTF-8") {
+    return new Blob([string], { type: "text/plain;charset=" + encoding });
+  }
+
   return (
     <>
       <Head>
@@ -92,13 +115,15 @@ export default function NewsFormTemplate({ news }: Props) {
 
           <Label htmlFor="photo">Photo</Label>
           <Input
-            {...register("photo", {
+            {...register("imagePath", {
               required: { value: false, message: "Photo is required" },
             })}
-            id="photo"
+            id="imagePath"
             type="file"
           />
-          {errors.photo && <PValidation>{errors.photo.message}</PValidation>}
+          {errors.imagePath && (
+            <PValidation>{errors.imagePath.message}</PValidation>
+          )}
 
           <InputButton type="submit">Submit</InputButton>
 

@@ -9,6 +9,7 @@ export const UpdateNews = async (news: News): Promise<void> => {
   const dataUpdate: News = {
     title: news.title,
     description: news.description,
+    imagePath: news.imagePath,
   };
   await firebase.firestore().collection("news").doc(news.id).update(dataUpdate);
 };

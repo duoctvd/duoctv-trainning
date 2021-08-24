@@ -32,6 +32,7 @@ export const NewsPagination = async (
       id: doc.id,
       title: doc.data().title,
       description: doc.data().description,
+      imagePath: doc.data().imagePath,
     });
   });
 
