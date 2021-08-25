@@ -28,12 +28,36 @@ export default function NewsFormTemplate({ news }: Props) {
       let imageName = await getRandomString(10);
       const storageRef = await firebase.storage().ref();
       // Create a reference to 'mountains.jpg'
+
+
       const photoRef = await storageRef.child(
         "images/news/" + imageName + ".jpg"
       );
+
+     
       let snapshot = await photoRef.put(
         await stringToArrayBuffer(data.imagePath[0])
       );
+
+
+      // Get metadata properties
+      photoRef.getMetadata().then((metadata) => {
+        // Metadata now contains the metadata for 'images/forest.jpg'
+      })
+      .catch((error) => {
+        // Uh-oh, an error occurred!
+      });
+
+      photoRef.makePublic().then((data) => {
+        const apiResponse = data[0];
+        console.log(apiResponse);
+      });
+
+
+
+      
+
+
       imagePath = await snapshot.ref.getDownloadURL();
     }
 
