@@ -41,14 +41,14 @@ export default function NewsFormTemplate({ news }: Props) {
 
 
       // Get metadata properties
-      photoRef.getMetadata().then((metadata) => {
+      photoRef.getMetadata().then((metadata) => {    // không lỗi 
         // Metadata now contains the metadata for 'images/forest.jpg'
       })
       .catch((error) => {
         // Uh-oh, an error occurred!
       });
 
-      photoRef.makePublic().then((data) => {
+      photoRef.makePublic().then((data) => {  // lỗi Property 'makePublic' does not exist on type 'Reference'
         const apiResponse = data[0];
         console.log(apiResponse);
       });
