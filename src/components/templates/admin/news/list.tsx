@@ -96,7 +96,7 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
                 <TD>
                   {item.imagePath && (
                     <Image
-                      src="https://firebasestorage.googleapis.com/v0/b/duoctv-trainning.appspot.com/o/images%2Fnews%2FtjvcBlGbrP.jpg?alt=media&token=ac76e327-e0c2-4092-9b5f-9e5662f49fd5"
+                      src={item.imagePath || ''}
                       alt="Picture of the product"
                       width={80}
                       height={80}
