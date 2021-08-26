@@ -22,6 +22,7 @@ export const RetrieveNews = async (limit = 0): Promise<News[]> => {
       id: doc.id,
       title: doc.data().title,
       description: doc.data().description,
+      imagePath: doc.data().imagePath,
     });
   });
 

@@ -16,7 +16,6 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
   var [newsListResult, setNewsListResult] = useState(newsList);
   const [end, setEnd] = useState(false);
   const [start, setStart] = useState(true);
-  const newNewsList: News[] = [];
 
   const nextPage = async () => {
     setEnd(false);
@@ -95,12 +94,14 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
             {newsListResult.map((item, index) => (
               <TR key={item.id}>
                 <TD>
-                  <Image
-                    src="/images/photo1.jpg"
-                    alt="Picture of the product"
-                    width={80}
-                    height={80}
-                  />
+                  {item.imagePath && (
+                    <Image
+                      src={item.imagePath || ''}
+                      alt="Picture of the product"
+                      width={80}
+                      height={80}
+                    />
+                  )}
                 </TD>
                 <TD>{item.title}</TD>
                 <TD>{item.description}</TD>
