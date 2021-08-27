@@ -9,19 +9,18 @@ import { GetStaticProps, GetStaticPropsContext } from "next";
 import { InferGetStaticPropsType } from "next";
 import { News } from "../../../models/news";
 import { RetrieveNews } from "../../../firestore/news/retrieveNews";
-import { GetServerSideProps } from "next";
-import { InferGetServerSidePropsType } from "next";
+// import { GetServerSideProps } from "next";
+// import { InferGetServerSidePropsType } from "next";
 import "firebase/storage";
-import useSWR from 'swr';
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { useNewListData } from "../../hooks/useNewListData";
 
  function List() {
-  // let newsList: News[] = [];
-  const { data, error } = useSWR('/api/news/retrievenews', fetcher);
-  if (error) return <div>failed to load</div>
-  if (!data) return <div>loading...</div>
-  let newsList: News[] = data;
+
+  const { newsList, isError, isLoading} = useNewListData();
+
+  if (isError) return <div>failed to load</div>
+  if (isLoading) return <div>loading...</div>
+
   return <NewsListTemplate newsList={newsList} />;
 }
 export default List;
