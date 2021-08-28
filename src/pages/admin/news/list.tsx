@@ -8,7 +8,6 @@ import "firebase/firestore";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import { InferGetStaticPropsType } from "next";
 import { News } from "../../../models/news";
-import { RetrieveNews } from "../../../firestore/news/retrieveNews";
 // import { GetServerSideProps } from "next";
 // import { InferGetServerSidePropsType } from "next";
 import "firebase/storage";

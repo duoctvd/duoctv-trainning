@@ -5,22 +5,21 @@ import { News } from "../../../../models/news";
 import NewsFormTemplate from "../../../../components/templates/admin/news/form";
 import { GetServerSideProps } from "next";
 import { InferGetServerSidePropsType } from "next";
-import { RetrieveNewsById } from "../../../../firestore/news/retrieveNewsById";
 import { useRetrieveNewsDataById } from "../../../hooks/useRetrieveNewsDataById";
 import { useRouter } from 'next/router';
 
 function Form() {
   const router = useRouter()
  
-  const idNews:string = router.query.id as string;
+  const newsId:string = router.query.id as string;
 
-  const { news, isError, isLoading} = useRetrieveNewsDataById(idNews);
+  const { news, isError, isLoading} = useRetrieveNewsDataById(newsId);
 
   
   if (isError) return <div>failed to load</div>
   if (isLoading) return <div>loading...</div>
 
-  console.log(news);
+  // console.log(news);
   return <NewsFormTemplate news={news} />;
 }
 

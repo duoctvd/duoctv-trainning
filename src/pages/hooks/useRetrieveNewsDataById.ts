@@ -1,17 +1,23 @@
 import "firebase/firestore";
 import { News } from "../../models/news";
 import useSWR from 'swr';
-import { RetrieveNewsById } from "../../firestore/news/retrieveNewsById";
+import { retrieveNewsById } from "../../firestore/news/retrieveNewsById";
 
-export function useRetrieveNewsDataById(idNews:string) {
-    
-    const { data, error } = useSWR("useRetrieveNewsDataById", async () => {
-      return await RetrieveNewsById(idNews);
+interface useRetrieveNewsDataById {
+  news: News;
+  isError: boolean;
+  isLoading: boolean;
+}
+
+export function useRetrieveNewsDataById(newsId:string): useRetrieveNewsDataById {
+   
+    const { data, error } = useSWR(newsId ? "useRetrieveNewsDataById" : null, async () => {
+      return await retrieveNewsById(newsId);
     });
 
     return {
-      news: data as News,
+      news: data,
       isError: !!error,
       isLoading: !data && !error,
-    };
+    } as useRetrieveNewsDataById;
 }

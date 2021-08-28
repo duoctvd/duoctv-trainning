@@ -2,7 +2,7 @@ import { firebase } from "../../../firebase";
 import "firebase/firestore";
 import { News } from "../../models/news";
 
-export const RetrieveNews = async (limit = 0): Promise<News[]> => {
+export const retrieveNews = async (limit = 0): Promise<News[]> => {
   const newsList: News[] = [];
 
   let query = firebase.firestore().collection("news").orderBy("title", "desc");
