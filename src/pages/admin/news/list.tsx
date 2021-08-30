@@ -11,7 +11,7 @@ import { News } from "../../../models/news";
 // import { GetServerSideProps } from "next";
 // import { InferGetServerSidePropsType } from "next";
 import "firebase/storage";
-import { useNewListData } from "../../hooks/useNewListData";
+import { useNewListData } from "../../../hooks/useNewListData";
 
  function List() {
 

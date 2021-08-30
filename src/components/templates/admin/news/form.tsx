@@ -7,8 +7,8 @@ import { News } from "../../../../models/news";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { firebase } from "../../../../../firebase";
 import "firebase/firestore";
-import { InsertNews } from "../../../../firestore/news/insertNews";
-import { UpdateNews } from "../../../../firestore/news/updateNews";
+import { insertNews } from "../../../../firestore/news/insertNews";
+import { updateNews } from "../../../../firestore/news/updateNews";
 import "firebase/storage";
 
 interface Props {
@@ -52,7 +52,7 @@ export default function NewsFormTemplate({ news }: Props) {
         openFlag: true,
         delFlag: false,
       };
-      newsID = await InsertNews(insertData);
+      newsID = await insertNews(insertData);
       alert("Document written " + newsID);
     } else {
       // To update age and favorite color:
@@ -63,7 +63,7 @@ export default function NewsFormTemplate({ news }: Props) {
         description: data.description,
         imagePath: imagePath,
       };
-      UpdateNews(updateData);
+      updateNews(updateData);
       alert("Document successfully updated!");
     }
   };

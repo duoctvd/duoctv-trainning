@@ -1,7 +1,7 @@
 import "firebase/firestore";
-import { News } from "../../models/news";
+import { News } from "../models/news";
 import useSWR from 'swr';
-import { retrieveNewsById } from "../../firestore/news/retrieveNewsById";
+import { retrieveNewsById } from "../firestore/news/retrieveNewsById";
 
 interface useRetrieveNewsDataById {
   news: News;

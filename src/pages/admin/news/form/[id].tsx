@@ -5,7 +5,7 @@ import { News } from "../../../../models/news";
 import NewsFormTemplate from "../../../../components/templates/admin/news/form";
 import { GetServerSideProps } from "next";
 import { InferGetServerSidePropsType } from "next";
-import { useRetrieveNewsDataById } from "../../../hooks/useRetrieveNewsDataById";
+import { useRetrieveNewsDataById } from "../../../../hooks/useRetrieveNewsDataById";
 import { useRouter } from 'next/router';
 
 function Form() {

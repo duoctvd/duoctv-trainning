@@ -5,8 +5,8 @@ import styled from "styled-components";
 import ThumnailProduct from "../../components/ThumnailProduct";
 import Footer from "../../components/Footer";
 import { News } from "../../models/news";
-import { RetrieveNews } from "../../firestore/news/retrieveNews";
-import { RetrieveNewsById } from "../../firestore/news/retrieveNewsById";
+import { retrieveNews } from "../../firestore/news/retrieveNews";
+import { retrieveNewsById } from "../../firestore/news/retrieveNewsById";
 import { GetStaticProps } from "next";
 import { GetStaticPaths } from "next";
 import { InferGetStaticPropsType } from "next";
@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   var news: News = { id: "", title: "", description: "" };
 
-  news = await RetrieveNewsById(idNews);
+  news = await retrieveNewsById(idNews);
 
   // Pass post data to the page via props
   return { props: { news } };
@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   var newsList: News[] = [];
   // await the promise
-  newsList = await RetrieveNews();
+  newsList = await retrieveNews();
 
   // Get the paths we want to pre-render based on posts
   const paths = newsList.map((news) => ({

@@ -7,9 +7,9 @@ import Link from "next/link";
 import { News } from "../../../../models/news";
 import "firebase/firestore";
 import { useRouter } from "next/router";
-import { DeleteNewsById } from "../../../../firestore/news/deleteNewsById";
+import { deleteNewsById } from "../../../../firestore/news/deleteNewsById";
 import { useState } from "react";
-import { NewsPagination } from "../../../../firestore/news/newsPagination";
+import { newsPagination } from "../../../../firestore/news/newsPagination";
 
 export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
   const router = useRouter();
@@ -20,7 +20,7 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
   const nextPage = async () => {
     setEnd(false);
 
-    const newNewsList = await NewsPagination("next", newsListResult);
+    const newNewsList = await newsPagination("next", newsListResult);
     setNewsListResult((newsListResult = newNewsList));
     if (newsListResult.length < 2) {
       setEnd(true);
@@ -31,7 +31,7 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
   const prevPage = async () => {
     setEnd(false);
     setStart(false);
-    const newNewsList = await NewsPagination("prev", newsListResult);
+    const newNewsList = await newsPagination("prev", newsListResult);
     // newsL = newNewsList;
     setNewsListResult((newsListResult = newNewsList));
 
@@ -59,7 +59,7 @@ export default function NewsListTemplate({ newsList }: { newsList: News[] }) {
 
   async function handleDelete(id: string) {
     // e.preventDefault();
-    await DeleteNewsById(id);
+    await deleteNewsById(id);
     alert("Document successfully deleted!" + id);
     router.replace("/admin/news/list");
   }

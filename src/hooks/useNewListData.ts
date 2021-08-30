@@ -1,7 +1,7 @@
 import "firebase/firestore";
-import { News } from "../../models/news";
+import { News } from "../models/news";
 import useSWR from 'swr';
-import { retrieveNews } from "../../firestore/news/retrieveNews";
+import { retrieveNews } from "../firestore/news/retrieveNews";
 
 interface UseNewListData {
   newsList: News[];
