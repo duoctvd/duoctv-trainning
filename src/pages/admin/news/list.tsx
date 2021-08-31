@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
-import NewsListTemplate from "src/components/templates/admin/news/list";
+import NewsListTemplate from "src/components/templates/admin/news/list/presenter";
 import "firebase/auth";
 import "firebase/firestore";
 // import { GetServerSideProps } from "next";
