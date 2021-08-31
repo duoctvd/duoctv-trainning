@@ -1,8 +1,8 @@
 import { firebase } from "../../../firebase";
 import "firebase/firestore";
-import { News } from "../../models/news";
+import { News } from "src/models/news";
 
-export const NewsPagination = async (
+export const newsPagination = async (
   mode = "",
   currentNewsList: News[] = []
 ): Promise<News[]> => {
