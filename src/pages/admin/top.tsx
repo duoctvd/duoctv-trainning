@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
-import Footer from "../../components/Footer";
+import Footer from "src/components/Footer";
 import { firebase } from "../../../firebase";
 import "firebase/auth";
 import Link from "next/link";

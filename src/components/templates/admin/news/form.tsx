@@ -1,14 +1,14 @@
 import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
-import Footer from "../../../../components/Footer";
+import Footer from "src/components/Footer";
 import Link from "next/link";
-import { News } from "../../../../models/news";
+import { News } from "src/models/news";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { firebase } from "../../../../../firebase";
 import "firebase/firestore";
-import { insertNews } from "../../../../firestore/news/insertNews";
-import { updateNews } from "../../../../firestore/news/updateNews";
+import { insertNews } from "src/firestore/news/insertNews";
+import { updateNews } from "src/firestore/news/updateNews";
 import "firebase/storage";
 
 interface Props {

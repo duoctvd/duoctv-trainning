@@ -1,9 +1,9 @@
 import Head from "next/head";
 import { InferGetStaticPropsType } from "next";
 import { GetStaticProps } from "next";
-import { News } from "../models/news";
-import { retrieveNews } from "../firestore/news/retrieveNews";
-import TopTemplate from "../components/templates/top";
+import { News } from "src/models/news";
+import { retrieveNews } from "src/firestore/news/retrieveNews";
+import TopTemplate from "src/components/templates/top";
 
 function Home({ newsList }: InferGetStaticPropsType<typeof getStaticProps>) {
   return <TopTemplate newsList={newsList} />;

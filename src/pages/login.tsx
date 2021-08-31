@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { firebase } from "../../firebase";
+import { firebase } from "src/firebase";
 import "firebase/auth";
 
 export default function Login() {

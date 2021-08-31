@@ -12,7 +12,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": "."
   },
   "include": [
     "next-env.d.ts",
@@ -22,5 +23,5 @@
     "pages/users.js",
     "pages/users.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

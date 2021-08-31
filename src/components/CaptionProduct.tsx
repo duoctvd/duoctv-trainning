@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { News } from "../models/news";
+import { News } from "src/models/news";
 
 export default function CaptionProduct({ news }: { news: News }) {
   return (

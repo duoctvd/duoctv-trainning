@@ -1,6 +1,6 @@
 import { firebase } from "../../../firebase";
 import "firebase/firestore";
-import { News } from "../../models/news";
+import { News } from "src/models/news";
 
 export const retrieveNews = async (limit = 0): Promise<News[]> => {
   const newsList: News[] = [];

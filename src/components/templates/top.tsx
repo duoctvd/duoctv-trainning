@@ -1,11 +1,11 @@
 import Head from "next/head";
 import styled from "styled-components";
-import Product from "../../components/Product";
-import Footer from "../../components/Footer";
+import Product from "src/components/Product";
+import Footer from "src/components/Footer";
 import Link from "next/link";
 import { firebase } from "../../../firebase";
 import "firebase/auth";
-import { News } from "../../models/news";
+import { News } from "src/models/news";
 
 export default function TopTemplate({ newsList }: { newsList: News[] }) {
   // [START auth_current_user]

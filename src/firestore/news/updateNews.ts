@@ -1,6 +1,6 @@
 import { firebase } from "../../../firebase";
 import "firebase/firestore";
-import { News } from "../../models/news";
+import { News } from "src/models/news";
 
 // export const InsertNews = async (news: News) => {   => OK
 // async function UpdateNews(news: News): Promise<any> {  => ok

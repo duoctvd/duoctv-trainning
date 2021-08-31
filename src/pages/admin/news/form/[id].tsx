@@ -1,11 +1,8 @@
 import React from "react";
 import "firebase/auth";
 import "firebase/firestore";
-import { News } from "../../../../models/news";
-import NewsFormTemplate from "../../../../components/templates/admin/news/form";
-import { GetServerSideProps } from "next";
-import { InferGetServerSidePropsType } from "next";
-import { useRetrieveNewsDataById } from "../../../../hooks/useRetrieveNewsDataById";
+import NewsFormTemplate from "src/components/templates/admin/news/form";
+import { useRetrieveNewsDataById } from "src/hooks/useRetrieveNewsDataById";
 import { useRouter } from 'next/router';
 
 function Form() {

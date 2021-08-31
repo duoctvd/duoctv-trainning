@@ -1,7 +1,7 @@
 import "firebase/firestore";
-import { News } from "../models/news";
+import { News } from "src/models/news";
 import useSWR from 'swr';
-import { retrieveNews } from "../firestore/news/retrieveNews";
+import { retrieveNews } from "src/firestore/news/retrieveNews";
 
 interface UseNewListData {
   newsList: News[];
@@ -9,14 +9,14 @@ interface UseNewListData {
   isLoading: boolean;
 }
 
-export function useNewListData() {
+export function useNewListData(): UseNewListData {
     const { data, error } = useSWR("useNewListData", async () => {
       return await retrieveNews();
     });
 
     return {
-      newsList: data,
+      newsList: data!,
       isError: !!error,
       isLoading: !data && !error,
-    } as UseNewListData;
+    };
 }
